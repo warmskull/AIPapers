@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /s /b \"d:\\\\1. 技术资料\\\\0. 论文s\\\\1. Paper AI相关\\\\Agent记忆\")",
+      "Bash(curl:*)"
+    ]
+  }
+}

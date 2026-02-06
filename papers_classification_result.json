@@ -1,0 +1,517 @@
+{
+  "Multimodal & Vision": [
+    [
+      "unknown",
+      "Yang_Depth_Anything_Unleashing_the_Power_of_Large-Scale_Unlabeled_Data_CVPR_2024_paper.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Yang_Depth_Anything_Unleashing_the_Power_of_Large-Scale_Unlabeled_Data_CVPR_2024_paper.pdf"
+    ],
+    [
+      "unknown",
+      "Zhao_DETRs_Beat_YOLOs_on_Real-time_Object_Detection_CVPR_2024_paper.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\RT - DETR\\Zhao_DETRs_Beat_YOLOs_on_Real-time_Object_Detection_CVPR_2024_paper.pdf"
+    ],
+    [
+      "2024",
+      "LLaVA-OneVision.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\LLaVA-OneVision.pdf"
+    ],
+    [
+      "2024",
+      "OpenVLA.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\OpenVLA.pdf"
+    ],
+    [
+      "2024",
+      "Phi-3-Vision.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Phi-3-Vision.pdf"
+    ],
+    [
+      "2024",
+      "RT-DETRv2.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\RT - DETR\\RT-DETRv2.pdf"
+    ],
+    [
+      "2024",
+      "OpenVLA.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\OpenVLA.pdf"
+    ],
+    [
+      "2024",
+      "YOLO-World.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\YOLO-World.pdf"
+    ],
+    [
+      "2023",
+      "DPO.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\DPO.pdf"
+    ],
+    [
+      "2023",
+      "Qwen-VL.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Qwen-VL.pdf"
+    ],
+    [
+      "2023",
+      "【周会】DPO_Direct_Preference_Optimization_Rafailov_2023.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\【周会】DPO_Direct_Preference_Optimization_Rafailov_2023.pdf"
+    ],
+    [
+      "2021",
+      "DINO.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\DINO.pdf"
+    ],
+    [
+      "2021",
+      "Vit：1616.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Vit：1616.pdf"
+    ],
+    [
+      "2021",
+      "Let’s Verify Step by Step.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Let’s Verify Step by Step.pdf"
+    ],
+    [
+      "2020",
+      "Vanilla_DETR.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\RT - DETR\\Vanilla_DETR.pdf"
+    ],
+    [
+      "2018",
+      "Dont Do RAG When Cache Augmented Generation is All You Need for.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Dont Do RAG When Cache Augmented Generation is All You Need for.pdf"
+    ],
+    [
+      "2016",
+      "EfficientNet.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\EfficientNet.pdf"
+    ]
+  ],
+  "Thermal Comfort": [
+    [
+      "unknown",
+      "舒适性DeepDive1 With Note.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\舒适性DeepDive1 With Note.pdf"
+    ],
+    [
+      "unknown",
+      "舒适性DeepDive1.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\舒适性DeepDive1.pdf"
+    ],
+    [
+      "unknown",
+      "舒适性DeepDive3.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\舒适性DeepDive3.pdf"
+    ],
+    [
+      "2025",
+      "EgoM2P Egocentric Multimodal Multitask Pretraining.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\EgoM2P Egocentric Multimodal Multitask Pretraining.pdf"
+    ],
+    [
+      "2024",
+      "Memory_Mechanism_Survey_2024.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Memory_Mechanism_Survey_2024.pdf"
+    ],
+    [
+      "2024",
+      "2024-03-06 MAHLE Comfort A.I. Customers.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\2024-03-06 MAHLE Comfort A.I. Customers.pdf"
+    ],
+    [
+      "2024",
+      "Pi0 A Vision-Language-Action Flow Model for General Robot Control.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Pi0 A Vision-Language-Action Flow Model for General Robot Control.pdf"
+    ],
+    [
+      "2024",
+      "Small Language Models are the Future of Agentic AI.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Small Language Models are the Future of Agentic AI.pdf"
+    ],
+    [
+      "2023",
+      "Introduction to magnetic refrigeration magnetocaloric materials.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Introduction to magnetic refrigeration magnetocaloric materials.pdf"
+    ],
+    [
+      "2023",
+      "Magnetic refrigeration Emerging technology for sustainable refrigeration.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Magnetic refrigeration Emerging technology for sustainable refrigeration.pdf"
+    ],
+    [
+      "2023",
+      "Sparks of Artificial General Intelligence Early Experiments with GPT-4.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Sparks of Artificial General Intelligence Early Experiments with GPT-4.pdf"
+    ],
+    [
+      "2022",
+      "Multi-Agent_Reinforcement_Learning_Based_Actuator_Control_for_EV_HVAC_Systems.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Multi-Agent_Reinforcement_Learning_Based_Actuator_Control_for_EV_HVAC_Systems.pdf"
+    ],
+    [
+      "2022",
+      "基于机器学习和红外图像分析的非接触式个体热舒适模型建立与应用.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\基于机器学习和红外图像分析的非接触式个体热舒适模型建立与应用.pdf"
+    ],
+    [
+      "2017",
+      "Review of magnetic refrigeration system as alternative to conventional refrigeration system.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Review of magnetic refrigeration system as alternative to conventional refrigeration system.pdf"
+    ]
+  ],
+  "Consciousness & Neuroscience": [
+    [
+      "unknown",
+      "Global_Workspace_Theory_Consciousness (1).pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Global_Workspace_Theory_Consciousness (1).pdf"
+    ],
+    [
+      "unknown",
+      "#2 A Learning Algorithm for Boltzmann Machines.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\诺奖\\#2 A Learning Algorithm for Boltzmann Machines.pdf"
+    ],
+    [
+      "2024",
+      "# 1 hopfield-1982-neural-networks-and-physical-systems-with-emergent-collective-computational-abilities.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\诺奖\\# 1 hopfield-1982-neural-networks-and-physical-systems-with-emergent-collective-computational-abilities.pdf"
+    ],
+    [
+      "2020",
+      "HOPFIELD NETWORKS IS ALL YOU NEED.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\诺奖\\HOPFIELD NETWORKS IS ALL YOU NEED.pdf"
+    ],
+    [
+      "2017",
+      "Titan.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Titan.pdf"
+    ],
+    [
+      "2017",
+      "Titans learning to memorize at test time.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Titans learning to memorize at test time.pdf"
+    ],
+    [
+      "2015",
+      "CLIP.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\CLIP.pdf"
+    ],
+    [
+      "2015",
+      "CLIP.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\CLIP.pdf"
+    ]
+  ],
+  "Agent & Memory": [
+    [
+      "unknown",
+      "演讲3-鸿运厅-主论坛-Aloudata 周卫林_20250619_Final.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\AI+BI峰会\\演讲3-鸿运厅-主论坛-Aloudata 周卫林_20250619_Final.pdf"
+    ],
+    [
+      "unknown",
+      "演讲5-鸿运厅-主论坛-岑润哲-Data Agent企业数据分析的范式革新20250619.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\AI+BI峰会\\演讲5-鸿运厅-主论坛-岑润哲-Data Agent企业数据分析的范式革新20250619.pdf"
+    ],
+    [
+      "unknown",
+      "LandingAI_Playbook_AI-Transformation_Playbook_2.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\LandingAI_Playbook_AI-Transformation_Playbook_2.pdf"
+    ],
+    [
+      "unknown",
+      "LandingAI_Transformation_Playbook_11-19.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\LandingAI_Transformation_Playbook_11-19.pdf"
+    ],
+    [
+      "unknown",
+      "#3 Learning representations by back-propagating errors.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\诺奖\\#3 Learning representations by back-propagating errors.pdf"
+    ],
+    [
+      "2026",
+      "Modular_Procedural_Memory.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Modular_Procedural_Memory.pdf"
+    ],
+    [
+      "2025",
+      "mindGPT4ov.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\mindGPT4ov.pdf"
+    ],
+    [
+      "2025",
+      "A-MEM.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\A-MEM.pdf"
+    ],
+    [
+      "2025",
+      "Difference_Aware_User_Modeling.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Difference_Aware_User_Modeling.pdf"
+    ],
+    [
+      "2025",
+      "Episodic_Memory_Risks.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Episodic_Memory_Risks.pdf"
+    ],
+    [
+      "2025",
+      "Memory_Mechanisms_2025_Survey.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Memory_Mechanisms_2025_Survey.pdf"
+    ],
+    [
+      "2025",
+      "Memory_OS.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Memory_OS.pdf"
+    ],
+    [
+      "2025",
+      "Personalized_QA.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Personalized_QA.pdf"
+    ],
+    [
+      "2025",
+      "Qwen2.5-VL.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Qwen2.5-VL.pdf"
+    ],
+    [
+      "2025",
+      "AGENTIC RETRIEVAL-AUGMENTED GENERATION A SURVEY.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\AGENTIC RETRIEVAL-AUGMENTED GENERATION A SURVEY.pdf"
+    ],
+    [
+      "2025",
+      "Life Long Learning of LLM.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Life Long Learning of LLM.pdf"
+    ],
+    [
+      "2024",
+      "EMG_RAG.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\EMG_RAG.pdf"
+    ],
+    [
+      "2024",
+      "MobileVLM.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\MobileVLM.pdf"
+    ],
+    [
+      "2024",
+      "Large Language Model-Brained GUI Agents A survey.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Survey 综述\\Large Language Model-Brained GUI Agents A survey.pdf"
+    ],
+    [
+      "2024",
+      "Language is primarily a tool for communication rather than thought.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Language is primarily a tool for communication rather than thought.pdf"
+    ],
+    [
+      "2024",
+      "o1-system-card.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\o1-system-card.pdf"
+    ],
+    [
+      "2024",
+      "self-play-preference-optimization-for-language-model-484kdxbaab.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\self-play-preference-optimization-for-language-model-484kdxbaab.pdf"
+    ],
+    [
+      "2023",
+      "ReAct.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\ReAct.pdf"
+    ],
+    [
+      "2023",
+      "Episodic_Memory_Missing_Piece.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Episodic_Memory_Missing_Piece.pdf"
+    ],
+    [
+      "2023",
+      "Generative_Agents.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Generative_Agents.pdf"
+    ],
+    [
+      "2023",
+      "LLaVA.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\LLaVA.pdf"
+    ],
+    [
+      "2023",
+      "MemP_Procedural_Memory.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\MemP_Procedural_Memory.pdf"
+    ],
+    [
+      "2023",
+      "Qwen2-VL.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Qwen2-VL.pdf"
+    ],
+    [
+      "2023",
+      "ReAct.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\ReAct.pdf"
+    ],
+    [
+      "2023",
+      "Reflexion.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Reflexion.pdf"
+    ],
+    [
+      "2023",
+      "Tree_of_Thoughts.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Tree_of_Thoughts.pdf"
+    ],
+    [
+      "2023",
+      "Generative Agents Interactive Simulacra of Human Behavior.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Generative Agents Interactive Simulacra of Human Behavior.pdf"
+    ],
+    [
+      "2021",
+      "BLIP2.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\BLIP2.pdf"
+    ],
+    [
+      "2020",
+      "Toolformer.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Toolformer.pdf"
+    ],
+    [
+      "2019",
+      "PINN_paper.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\PINN_paper.pdf"
+    ],
+    [
+      "2018",
+      "Personalization_Survey.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Personalization_Survey.pdf"
+    ],
+    [
+      "2017",
+      "MemGPT.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\MemGPT.pdf"
+    ]
+  ],
+  "Other": [
+    [
+      "unknown",
+      "Letta_Agent_Memory.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\Letta_Agent_Memory.pdf"
+    ],
+    [
+      "unknown",
+      "LLM_MAS_Memory_Survey.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\LLM_MAS_Memory_Survey.pdf"
+    ],
+    [
+      "unknown",
+      "PersonaMem.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Agent记忆\\papers\\PersonaMem.pdf"
+    ],
+    [
+      "unknown",
+      "国家人工智能产业综合标准化体系建设指南（2024版）.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\国家人工智能产业综合标准化体系建设指南（2024版）.pdf"
+    ],
+    [
+      "2023",
+      "ISO IEC 42001-2023.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\ISO IEC 42001-2023.pdf"
+    ],
+    [
+      "2018",
+      "特征工程入门与实践.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\特征工程入门与实践.pdf"
+    ]
+  ],
+  "DeepSeek": [
+    [
+      "unknown",
+      "演讲2-鸿运厅-主论坛-朱滨AI+BI在马上消金场景中的应用实践探索(V1.2).pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\AI+BI峰会\\演讲2-鸿运厅-主论坛-朱滨AI+BI在马上消金场景中的应用实践探索(V1.2).pdf"
+    ],
+    [
+      "2025",
+      "Long COT Survey.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Survey 综述\\Long COT Survey.pdf"
+    ],
+    [
+      "2025",
+      "Long COT Survey.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Long COT Survey.pdf"
+    ],
+    [
+      "2025",
+      "Long COT 标注.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Long COT 标注.pdf"
+    ],
+    [
+      "2024",
+      "DeepSeek_R1.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\DeepSeek\\DeepSeek_R1.pdf"
+    ],
+    [
+      "2024",
+      "DeepSeek_V2.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\DeepSeek\\DeepSeek_V2.pdf"
+    ],
+    [
+      "2024",
+      "DeepSeek_V3.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\DeepSeek\\DeepSeek_V3.pdf"
+    ],
+    [
+      "2024",
+      "【DeepSeek  day0】Fire-Flyer AI-HPC.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\DeepSeek\\【DeepSeek  day0】Fire-Flyer AI-HPC.pdf"
+    ],
+    [
+      "2024",
+      "Kimi_k1.5.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Kimi_k1.5.pdf"
+    ],
+    [
+      "2020",
+      "DeepSeekMoE.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\DeepSeek\\DeepSeekMoE.pdf"
+    ]
+  ],
+  "Language Model": [
+    [
+      "2015",
+      "演讲4-鸿运厅-主论坛-刘岩老师【fin】LLM在腾讯游戏数据分析实战-v1.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\AI+BI峰会\\演讲4-鸿运厅-主论坛-刘岩老师【fin】LLM在腾讯游戏数据分析实战-v1.pdf"
+    ]
+  ],
+  "MoE": [
+    [
+      "2024",
+      "MOE.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Survey 综述\\MOE.pdf"
+    ],
+    [
+      "2017",
+      "Attention Is All You Need 中文翻译.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Attention is all you need\\Attention Is All You Need 中文翻译.pdf"
+    ]
+  ],
+  "RAG & Retrieval": [
+    [
+      "2023",
+      "GPT-4-system-card.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\GPT-4-system-card.pdf"
+    ],
+    [
+      "2020",
+      "Stable Diffusion Paper Berkeley.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\Stable Diffusion Paper Berkeley.pdf"
+    ],
+    [
+      "2014",
+      "Attention Is All You Need.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\Attention is all you need\\transformer\\Attention Is All You Need.pdf"
+    ]
+  ],
+  "Image Generation": [
+    [
+      "2018",
+      "PINN.pdf",
+      "D:\\1. 技术资料\\0. 论文s\\1. Paper AI相关\\旧论文归档\\PINN.pdf"
+    ]
+  ]
+}

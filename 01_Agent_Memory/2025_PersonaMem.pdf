@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale</title>
+<!--Generated on Sat Apr 19 08:01:07 2025 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2504.14225v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S1" title="In Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S2" title="In Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="14" src="extracted/6370758/figures/silhouette-emoji.png" width="13"/> <span class="ltx_text ltx_font_smallcaps">PersonaMem</span> Benchmark: Overview</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S2.SS0.SSS0.Px1" title="In 2 PersonaMem Benchmark: Overview ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title">Types of skills evaluated.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S2.SS0.SSS0.Px2" title="In 2 PersonaMem Benchmark: Overview ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title">Benchmark data statistics.</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S3" title="In Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Constructing Examples in <img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="14" src="extracted/6370758/figures/silhouette-emoji.png" width="13"/> <span class="ltx_text ltx_font_smallcaps">PersonaMem</span> At Scale</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S3.SS0.SSS0.Px1" title="In 3 Constructing Examples in PersonaMem At Scale ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title">Constructe user profile and persona.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S3.SS0.SSS0.Px2" title="In 3 Constructing Examples in PersonaMem At Scale ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title">Simulate conversation sessions from user profile.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S3.SS0.SSS0.Px3" title="In 3 Constructing Examples in PersonaMem At Scale ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title">Assemble interaction history via session concatenation.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S3.SS0.SSS0.Px4" title="In 3 Constructing Examples in PersonaMem At Scale ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title">Human validation on dataset quality.</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4" title="In Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Experiment</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.SS1" title="In 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Evaluation Settings</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.SS2" title="In 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Evaluating Language Models in Long-Context Settings</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.SS2.SSS0.Px1" title="In 4.2 Evaluating Language Models in Long-Context Settings ‣ 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title">GPT-4.5, GPT-4.1, and Gemini-1.5 achieve the highest overall performance.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.SS2.SSS0.Px2" title="In 4.2 Evaluating Language Models in Long-Context Settings ‣ 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title">LLMs demonstrate reasonably good performance in recalling simple user facts.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.SS2.SSS0.Px3" title="In 4.2 Evaluating Language Models in Long-Context Settings ‣ 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title">Incorporating the latest user preference into responses is more challenging than recalling the change in user profile.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.SS2.SSS0.Px4" title="In 4.2 Evaluating Language Models in Long-Context Settings ‣ 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title">Models fall short on generating new ideas or providing suggestions in new scenarios.</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.SS3" title="In 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.3 </span>Effect from the Position of User Information in Interaction History</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.SS4" title="In 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.4 </span>Evaluation with External Memory Modules</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.SS4.SSS0.Px1" title="In 4.4 Evaluation with External Memory Modules ‣ 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title">Retriever-based memory module can improve model performance.</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.SS5" title="In 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.5 </span>Evaluation of Language Models in Generative Settings</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.SS5.SSS0.Px1" title="In 4.5 Evaluation of Language Models in Generative Settings ‣ 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title">Approaches.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.SS5.SSS0.Px2" title="In 4.5 Evaluation of Language Models in Generative Settings ‣ 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title">Results.</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S5" title="In Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Related Work</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S5.SS1" title="In 5 Related Work ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.1 </span>Evaluating Long-Context Memory Capabilities of LLMs</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S5.SS2" title="In 5 Related Work ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.2 </span>Towards Personalization in Large Language Models</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S6" title="In Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Conclusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_appendix"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#A1" title="In Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A </span>Details on Human Evaluation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_appendix"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#A2" title="In Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">B </span>Supplementary Experiment Results</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_appendix"><a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#A3" title="In Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">C </span>Prompts Used in <img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="14" src="extracted/6370758/figures/silhouette-emoji.png" width="13"/> <span class="ltx_text ltx_font_smallcaps">PersonaMem</span>  Dataset Generation</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">
+<span class="ltx_text ltx_font_italic" id="id3.id1">Know Me, Respond to Me:</span> Benchmarking LLMs for 
+<br class="ltx_break"/>Dynamic User Profiling and Personalized Responses at Scale</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Bowen Jiang<sup class="ltx_sup" id="id4.1.id1">1</sup>,  Zhuoqun Hao<sup class="ltx_sup" id="id5.2.id2">1</sup><span class="ltx_note ltx_role_footnotemark" id="footnotex1"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_note_type">footnotemark: </span><span class="ltx_tag ltx_tag_note">1</span></span></span></span>,  Young-Min Cho<sup class="ltx_sup" id="id6.3.id3">1</sup>,  Bryan Li<sup class="ltx_sup" id="id7.4.id4">1</sup>, Yuan Yuan<sup class="ltx_sup" id="id8.5.id5">1</sup>, 
+<br class="ltx_break"/><span class="ltx_text ltx_font_bold" id="id9.6.id6">Sihao Chen<sup class="ltx_sup" id="id9.6.id6.1">2</sup>,  Lyle Ungar<sup class="ltx_sup" id="id9.6.id6.2">1</sup>, Camillo J. Taylor<sup class="ltx_sup" id="id9.6.id6.3">1</sup>,  Dan Roth<sup class="ltx_sup" id="id9.6.id6.4">1</sup><span class="ltx_note ltx_role_footnotemark" id="footnotex2"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_note_type">footnotemark: </span><span class="ltx_tag ltx_tag_note"><span class="ltx_text ltx_font_medium" id="footnotex2.1.1.1">2</span></span></span></span></span></span>
+<br class="ltx_break"/>University of Pennsylvania, Philadelphia, PA<sup class="ltx_sup" id="id10.7.id7">1</sup>
+<br class="ltx_break"/>Microsoft, Redmond, WA<sup class="ltx_sup" id="id11.8.id8">2</sup>
+<br class="ltx_break"/>
+<span class="ltx_text ltx_font_typewriter" id="id12.9.id9">{bwjiang, zhuoqunh, jch0, bryanli, yyuan86}@upenn.edu
+<br class="ltx_break"/></span>
+<span class="ltx_text ltx_font_typewriter" id="id13.10.id10">sihaochen@microsoft.com, {ungar, cjtaylor, danroth}@upenn.edu</span>
+</span><span class="ltx_author_notes">Equal contribution<span class="ltx_text ltx_font_bold" id="id14.11.id1">Equal advising</span></span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id15.id1">Large Language Models (LLMs) have emerged as <span class="ltx_text ltx_font_italic" id="id15.id1.1">personalized</span> assistants for users across a wide range of tasks – from offering writing support to delivering tailored recommendations or consultations. Over time, the interaction history between a user and an LLM can provide extensive information about an individual’s traits and preferences. However, open questions remain on how well LLMs today can effectively leverage such history to (1) internalize the user’s inherent traits and preferences, (2) track how the user profiling and preferences evolve over time, and (3) generate personalized responses accordingly in new scenarios.</p>
+<p class="ltx_p" id="id2.2">In this work, we introduce the <img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="14" id="id1.1.g1" src="extracted/6370758/figures/silhouette-emoji.png" width="13"/><span class="ltx_text ltx_font_italic" id="id2.2.1"> <span class="ltx_text ltx_font_smallcaps" id="id2.2.1.1">PersonaMem</span></span> benchmark. <span class="ltx_text ltx_font_smallcaps" id="id2.2.2">PersonaMem</span> features curated user profiles with over 180 simulated user-LLM interaction histories, each containing up to 60 sessions of multi-turn conversations across 15 real-world tasks that require personalization. Given an <em class="ltx_emph ltx_font_italic" id="id2.2.3">in-situ</em> user query, i.e. query issued by the user from the first-person perspective,
+we evaluate LLM chatbots’ ability to identify the most suitable response according to the current state of the user’s profile.
+We observe that current LLMs still struggle to recognize the dynamic evolution in users’ profiles over time through direct prompting approaches. As a consequence, LLMs often fail to deliver responses that align with users’ current situations and preferences, with frontier models such as GPT-4.1, o4-mini, GPT-4.5, o1, or Gemini-2.0 achieving only around <math alttext="50\%" class="ltx_Math" display="inline" id="id2.2.m1.1"><semantics id="id2.2.m1.1a"><mrow id="id2.2.m1.1.1" xref="id2.2.m1.1.1.cmml"><mn id="id2.2.m1.1.1.2" xref="id2.2.m1.1.1.2.cmml">50</mn><mo id="id2.2.m1.1.1.1" xref="id2.2.m1.1.1.1.cmml">%</mo></mrow><annotation-xml encoding="MathML-Content" id="id2.2.m1.1b"><apply id="id2.2.m1.1.1.cmml" xref="id2.2.m1.1.1"><csymbol cd="latexml" id="id2.2.m1.1.1.1.cmml" xref="id2.2.m1.1.1.1">percent</csymbol><cn id="id2.2.m1.1.1.2.cmml" type="integer" xref="id2.2.m1.1.1.2">50</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="id2.2.m1.1c">50\%</annotation><annotation encoding="application/x-llamapun" id="id2.2.m1.1d">50 %</annotation></semantics></math> overall accuracy, suggesting room for improvement. We hope that <span class="ltx_text ltx_font_smallcaps" id="id2.2.4">PersonaMem</span>, along with the user profile and conversation simulation pipeline, can facilitate future research in the development of truly user-aware chatbots.
+Code and data are available at <a class="ltx_ref ltx_href" href="https://github.com/bowen-upenn/PersonaMem" title="">github.com/bowen-upenn/PersonaMem</a>.</p>
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para ltx_noindent" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">In recent years, Large Language Models (LLMs) have rapidly evolved as general task solvers, demonstrating remarkable performance <cite class="ltx_cite ltx_citemacro_citep">(Srivastava et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib42" title="">2023</a>; Zhou et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib58" title="">2023</a>; Yue et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib54" title="">2024</a>; Rein et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib37" title="">2024</a>)</cite>.
+Today, many users rely on LLMs as their <span class="ltx_text ltx_font_italic" id="S1.p1.1.1">personalized</span> chatbots or assistants in a wide range of daily tasks – from offering writing support <cite class="ltx_cite ltx_citemacro_citep">(Mysore et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib29" title="">2024</a>; Tian et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib45" title="">2024</a>)</cite> to delivering recommendations <cite class="ltx_cite ltx_citemacro_citep">(Hua et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib15" title="">2023</a>)</cite> or consultations <cite class="ltx_cite ltx_citemacro_citep">(Xie et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib49" title="">2024a</a>; Zheng et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib57" title="">2024</a>)</cite>, etc. Personalization in LLMs involves adapting model responses to specific traits, preferences, and historical interactions of each user, moving beyond generic responses to more relevant and tailored ones. Since different users have different personas, it becomes an emergent need for LLMs to be <em class="ltx_emph ltx_font_italic" id="S1.p1.1.2">pluralistic</em>—capable of adapting to different user characteristics across different scenarios <cite class="ltx_cite ltx_citemacro_citep">(Sorensen et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib41" title="">2024</a>; Jiang et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib17" title="">2024</a>; Xie et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib50" title="">2024b</a>; Kirk et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib20" title="">2024</a>)</cite>, thereby enhancing user experience and engagement.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">For LLMs to deliver personalized responses, a practical challenge lies in the fact that LLMs cannot easily access all the information about a user.
+This challenge is further amplified by the <span class="ltx_text ltx_font_italic" id="S1.p2.1.1">ever-changing</span> nature of user preferences over time <cite class="ltx_cite ltx_citemacro_citep">(Radlinski &amp; Craswell, <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib36" title="">2017</a>; Dean &amp; Morgenstern, <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib9" title="">2022</a>)</cite>. For example, as illustrated in Figure <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S1.F1" title="Figure 1 ‣ 1 Introduction ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">1</span></a>, a user initially said, <span class="ltx_text ltx_font_italic" id="S1.p2.1.2">”I like pizza”</span>, but mentioned in a later session, <span class="ltx_text ltx_font_italic" id="S1.p2.1.3">”I’ve started exploring gluten-free options,”</span> upon discovering a gluten allergy.
+When the user again asks for food recommendations, a personalized LLM chatbot should be able to track the change, and provide recommendations according to the user’s current situation. Current LLM chatbots often fail to recognize and adapt to evolving user personas. This may lead users to perceive these chatbots as less helpful and empathetic, ultimately diminishing satisfaction <cite class="ltx_cite ltx_citemacro_citep">(Aggarwal et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib2" title="">2023</a>; Ait Baha et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib3" title="">2023</a>)</cite>.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">In this work, we evaluate LLMs’ ability to leverage the <span class="ltx_text ltx_font_italic" id="S1.p3.1.1">past interaction history</span> with a user in order to deliver a personalized response in real time. Recent studies <cite class="ltx_cite ltx_citemacro_citep">(Lin et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib25" title="">2024</a>; Shi et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib40" title="">2024</a>; Zhao et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib56" title="">2025</a>)</cite> have found that user-LLM interactions can be a rich (but often implicit) information source on the user’s characteristics and preferences.
+However, it remains an open question whether LLMs can effectively use the interaction histories to (1) internalize the user’s inherent traits and preferences, (2) track how the user’s characteristics evolve over time, and (3) generate personalized responses accordingly in new scenarios.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">To study these questions, we propose the <img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="14" id="S1.p4.1.g1" src="extracted/6370758/figures/silhouette-emoji.png" width="13"/> <span class="ltx_text ltx_font_smallcaps" id="S1.p4.1.1">PersonaMem</span> benchmark, comprising over 180 simulated user-LLM interaction histories with up to 60 multi-turn sessions across 15 personalized task scenarios. Each history is built from a detailed user persona whose characteristics evolve over time. Based on the user’s profile at different points, we simulate task-specific conversations (e.g., travel, therapy, food) and concatenate them in temporal order to capture the user’s profile evolution throughout the entire interaction history.</p>
+</div>
+<figure class="ltx_figure" id="S1.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="421" id="S1.F1.g1" src="x1.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>Overview of <span class="ltx_text ltx_font_smallcaps" id="S1.F1.2.1">PersonaMem</span> benchmark. Each benchmark sample is a user persona with static (e.g., demographic info.) and dynamic attributes (e.g., evolving preferences). Users engage with a chatbot in multi-session interactions across a variety of topics such as food recommendation, travel planning, and therapy consultation. As the user’s preferences evolve over time, the benchmark offers annotated questions assessing whether models can track and incorporate the changes into their responses.</figcaption>
+</figure>
+<div class="ltx_para ltx_noindent" id="S1.p5">
+<p class="ltx_p" id="S1.p5.3">With <img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="14" id="S1.p5.1.g1" src="extracted/6370758/figures/silhouette-emoji.png" width="13"/> <span class="ltx_text ltx_font_smallcaps" id="S1.p5.3.1">PersonaMem</span>, we evaluate whether state-of-the-art LLMs can infer evolving user profiles and generate personalized responses across task scenarios. To emulate the realistic settings in user-LLM interactions, we design 7 types of <span class="ltx_text ltx_font_italic" id="S1.p5.3.2">in-situ</span> user queries (<a class="ltx_ref ltx_refmacro_autoref" href="https://arxiv.org/html/2504.14225v1#S2.T1" title="Table 1 ‣ Benchmark data statistics. ‣ 2 PersonaMem Benchmark: Overview ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">Table 1</span></a>), where users issue queries to LLMs from first-person perspectives. We evaluate whether LLMs can select the correct response that best aligns with the current state of the user. We find that frontier models such as GPT-4.1, o4-mini, GPT-4.5, o1, or Gemini-2.0-Flash score only around <math alttext="50\%" class="ltx_Math" display="inline" id="S1.p5.2.m1.1"><semantics id="S1.p5.2.m1.1a"><mrow id="S1.p5.2.m1.1.1" xref="S1.p5.2.m1.1.1.cmml"><mn id="S1.p5.2.m1.1.1.2" xref="S1.p5.2.m1.1.1.2.cmml">50</mn><mo id="S1.p5.2.m1.1.1.1" xref="S1.p5.2.m1.1.1.1.cmml">%</mo></mrow><annotation-xml encoding="MathML-Content" id="S1.p5.2.m1.1b"><apply id="S1.p5.2.m1.1.1.cmml" xref="S1.p5.2.m1.1.1"><csymbol cd="latexml" id="S1.p5.2.m1.1.1.1.cmml" xref="S1.p5.2.m1.1.1.1">percent</csymbol><cn id="S1.p5.2.m1.1.1.2.cmml" type="integer" xref="S1.p5.2.m1.1.1.2">50</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S1.p5.2.m1.1c">50\%</annotation><annotation encoding="application/x-llamapun" id="S1.p5.2.m1.1d">50 %</annotation></semantics></math> overall accuracy and Llama-4-Maverick slightly lower at <math alttext="43\%" class="ltx_Math" display="inline" id="S1.p5.3.m2.1"><semantics id="S1.p5.3.m2.1a"><mrow id="S1.p5.3.m2.1.1" xref="S1.p5.3.m2.1.1.cmml"><mn id="S1.p5.3.m2.1.1.2" xref="S1.p5.3.m2.1.1.2.cmml">43</mn><mo id="S1.p5.3.m2.1.1.1" xref="S1.p5.3.m2.1.1.1.cmml">%</mo></mrow><annotation-xml encoding="MathML-Content" id="S1.p5.3.m2.1b"><apply id="S1.p5.3.m2.1.1.cmml" xref="S1.p5.3.m2.1.1"><csymbol cd="latexml" id="S1.p5.3.m2.1.1.1.cmml" xref="S1.p5.3.m2.1.1.1">percent</csymbol><cn id="S1.p5.3.m2.1.1.2.cmml" type="integer" xref="S1.p5.3.m2.1.1.2">43</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S1.p5.3.m2.1c">43\%</annotation><annotation encoding="application/x-llamapun" id="S1.p5.3.m2.1d">43 %</annotation></semantics></math> using direct prompt approaches.
+While models perform reasonably well on recalling facts and tracking preference changes (60–70% accuracy), they struggle to incorporate users’ latest situations into responses (30–50% accuracy). We provide detailed analysis on how factors such as history length, preference positioning, and memory components may impact performance.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S1.p6">
+<p class="ltx_p" id="S1.p6.1">To summarize our key contributions and findings:</p>
+<ul class="ltx_itemize" id="S1.I1">
+<li class="ltx_item" id="S1.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i1.p1">
+<p class="ltx_p" id="S1.I1.i1.p1.1">We propose the <img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="14" id="S1.I1.i1.p1.1.g1" src="extracted/6370758/figures/silhouette-emoji.png" width="13"/> <span class="ltx_text ltx_font_smallcaps" id="S1.I1.i1.p1.1.1">PersonaMem</span> benchmark and its synthetic dialog generation pipeline for persona-oriented, multi-session, and timelined user-chatbot interaction history.
+</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i2.p1">
+<p class="ltx_p" id="S1.I1.i2.p1.1">We assess 15 LLMs on 7 types of <span class="ltx_text ltx_font_italic" id="S1.I1.i2.p1.1.1">in-situ</span> user queries and evaluate their ability to provide responses aligned with user’s dynamically changing profile across 15 task scenarios.
+</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para ltx_noindent" id="S1.I1.i3.p1">
+<p class="ltx_p" id="S1.I1.i3.p1.1">With <span class="ltx_text ltx_font_smallcaps" id="S1.I1.i3.p1.1.1">PersonaMem</span>, we observe that frontier models such as GPT4.1, o4-mini, GPT-4.5, o1, DeepSeek-R1, Gemini-2.0, Llama-4, and Claude-3.7 still struggle to be user-aware and deliver personalized responses, especially when the knowledge of the user needs to be applied across new scenarios.
+</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="14" id="S2.1.g1" src="extracted/6370758/figures/silhouette-emoji.png" width="13"/> <span class="ltx_text ltx_font_smallcaps" id="S2.2.1">PersonaMem</span> Benchmark: Overview</h2>
+<div class="ltx_para ltx_noindent" id="S2.p1">
+<p class="ltx_p" id="S2.p1.1">We present an overview of the <span class="ltx_text ltx_font_smallcaps" id="S2.p1.1.1">PersonaMem</span> benchmark in Figure <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S1.F1" title="Figure 1 ‣ 1 Introduction ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">1</span></a>.
+Each instance in the benchmark dataset features a <span class="ltx_text ltx_font_italic" id="S2.p1.1.2">user profile or persona</span>, which includes basic demographic information (such as name, age, gender, and occupation), as well as <span class="ltx_text ltx_font_italic" id="S2.p1.1.3">dynamic</span> user characteristics such as user traits, preferences, and events happening in the user’s life. The dynamic user characteristics change over time as different events happen to the user that will lead to changes in users’ traits and preferences specific to each task scenario.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S2.p2">
+<p class="ltx_p" id="S2.p2.1">At different points in time of a user’s profile evolution, the user engages in multi-turn conversations with LLM and seeks help or suggestions from LLM on one of the task scenarios. In each task scenario, the user would ask for the LLM’s suggestions given the user’s need and current situation. The conversation sessions across different tasks are interleaved by the temporal order in which the sessions happen.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S2.p3">
+<p class="ltx_p" id="S2.p3.1">To understand how well LLM chatbots can track the evolution in a user’s profile from the conversation histories, we evaluate LLMs by whether they can provide the most suitable response to <em class="ltx_emph ltx_font_italic" id="S2.p3.1.1">in-situ</em> user queries, where the user issues the query to LLM in a new conversation session from the first-person perspective. Depending on the time of the <em class="ltx_emph ltx_font_italic" id="S2.p3.1.2">in-situ</em> query, the expected response from the model will differ. We cast the problem as a multiple-choice selection, where LLM needs to identify the correct response out of four choices, where the incorrect choices are based on either outdated or irrelevant information with respect to the current state of the user’s profile.</p>
+</div>
+<section class="ltx_paragraph" id="S2.SS0.SSS0.Px1">
+<h4 class="ltx_title ltx_title_paragraph">Types of skills evaluated.</h4>
+<div class="ltx_para ltx_noindent" id="S2.SS0.SSS0.Px1.p1">
+<p class="ltx_p" id="S2.SS0.SSS0.Px1.p1.1">To evaluate LLMs’ ability to (1) memorize the user profile, (2) track how the user profile evolve over time, and (3) generate personalized responses accordingly in new scenarios, we design the following 7 types of <em class="ltx_emph ltx_font_italic" id="S2.SS0.SSS0.Px1.p1.1.1">in-situ</em> user queries in the <span class="ltx_text ltx_font_smallcaps" id="S2.SS0.SSS0.Px1.p1.1.2">PersonaMem</span> benchmark. We include examples for each type of user queries in <a class="ltx_ref ltx_refmacro_autoref" href="https://arxiv.org/html/2504.14225v1#S2.T1" title="Table 1 ‣ Benchmark data statistics. ‣ 2 PersonaMem Benchmark: Overview ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">Table 1</span></a>.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S2.SS0.SSS0.Px1.p2">
+<ol class="ltx_enumerate" id="S2.I1">
+<li class="ltx_item" id="S2.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span>
+<div class="ltx_para" id="S2.I1.i1.p1">
+<p class="ltx_p" id="S2.I1.i1.p1.1"><span class="ltx_text ltx_font_bold" id="S2.I1.i1.p1.1.1">Recall user-shared facts.</span> We evaluate whether a personalized chatbot can recall static events, activities, or interests the user has shared in previous interactions, and incorporate the information in its responses.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span>
+<div class="ltx_para" id="S2.I1.i2.p1">
+<p class="ltx_p" id="S2.I1.i2.p1.1"><span class="ltx_text ltx_font_bold" id="S2.I1.i2.p1.1.1">Suggest new ideas.</span> We evaluate whether a chatbot can suggest new items or activities that have not been mentioned in the interaction history, when users explicitly request so, e.g. “<span class="ltx_text ltx_font_italic" id="S2.I1.i2.p1.1.2">suggest new restaurants I haven’t ordered from before</span>”.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">3.</span>
+<div class="ltx_para" id="S2.I1.i3.p1">
+<p class="ltx_p" id="S2.I1.i3.p1.1"><span class="ltx_text ltx_font_bold" id="S2.I1.i3.p1.1.1">Acknowledge latest user preferences.</span> We evaluate whether a chatbot can recognize the latest preference expressed by the user in the interaction history.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">4.</span>
+<div class="ltx_para" id="S2.I1.i4.p1">
+<p class="ltx_p" id="S2.I1.i4.p1.1"><span class="ltx_text ltx_font_bold" id="S2.I1.i4.p1.1.1">Track full preference evolution.</span> We evaluate whether a chatbot can keep track of how users’ preferences shift by time.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i5" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">5.</span>
+<div class="ltx_para" id="S2.I1.i5.p1">
+<p class="ltx_p" id="S2.I1.i5.p1.1"><span class="ltx_text ltx_font_bold" id="S2.I1.i5.p1.1.1">Revisit reasons behind preference updates.</span> We evaluate whether a chatbot can recall the reason(s) or event(s) leading to the preference change from a user.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i6" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">6.</span>
+<div class="ltx_para" id="S2.I1.i6.p1">
+<p class="ltx_p" id="S2.I1.i6.p1.1"><span class="ltx_text ltx_font_bold" id="S2.I1.i6.p1.1.1">Provide preference-aligned recommendations.</span> We test whether a chatbot can proactively offer new recommendations
+that aligns with the user’s current preferences.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i7" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">7.</span>
+<div class="ltx_para ltx_noindent" id="S2.I1.i7.p1">
+<p class="ltx_p" id="S2.I1.i7.p1.1"><span class="ltx_text ltx_font_bold" id="S2.I1.i7.p1.1.1">Generalize to new scenarios.</span> We evaluate whether a chatbot can transfer what it learns about the user from other task scenarios to a new task.</p>
+</div>
+</li>
+</ol>
+</div>
+</section>
+<section class="ltx_paragraph" id="S2.SS0.SSS0.Px2">
+<h4 class="ltx_title ltx_title_paragraph">Benchmark data statistics.</h4>
+<div class="ltx_para ltx_noindent" id="S2.SS0.SSS0.Px2.p1">
+<img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="14" id="S2.SS0.SSS0.Px2.p1.g1" src="extracted/6370758/figures/silhouette-emoji.png" width="13"/>
+<p class="ltx_p" id="S2.SS0.SSS0.Px2.p1.4"><span class="ltx_text ltx_font_smallcaps" id="S2.SS0.SSS0.Px2.p1.4.1">PersonaMem</span> features 20 personas, with over 180 interaction histories. Each interaction history contains 10, 20, or 60 sessions, where we dynamically adjust the total length of the history to approximately 32<math alttext="k" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p1.1.m1.1"><semantics id="S2.SS0.SSS0.Px2.p1.1.m1.1a"><mi id="S2.SS0.SSS0.Px2.p1.1.m1.1.1" xref="S2.SS0.SSS0.Px2.p1.1.m1.1.1.cmml">k</mi><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p1.1.m1.1b"><ci id="S2.SS0.SSS0.Px2.p1.1.m1.1.1.cmml" xref="S2.SS0.SSS0.Px2.p1.1.m1.1.1">𝑘</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p1.1.m1.1c">k</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p1.1.m1.1d">italic_k</annotation></semantics></math>, 128<math alttext="k" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p1.2.m2.1"><semantics id="S2.SS0.SSS0.Px2.p1.2.m2.1a"><mi id="S2.SS0.SSS0.Px2.p1.2.m2.1.1" xref="S2.SS0.SSS0.Px2.p1.2.m2.1.1.cmml">k</mi><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p1.2.m2.1b"><ci id="S2.SS0.SSS0.Px2.p1.2.m2.1.1.cmml" xref="S2.SS0.SSS0.Px2.p1.2.m2.1.1">𝑘</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p1.2.m2.1c">k</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p1.2.m2.1d">italic_k</annotation></semantics></math>, and 1<math alttext="M" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p1.3.m3.1"><semantics id="S2.SS0.SSS0.Px2.p1.3.m3.1a"><mi id="S2.SS0.SSS0.Px2.p1.3.m3.1.1" xref="S2.SS0.SSS0.Px2.p1.3.m3.1.1.cmml">M</mi><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p1.3.m3.1b"><ci id="S2.SS0.SSS0.Px2.p1.3.m3.1.1.cmml" xref="S2.SS0.SSS0.Px2.p1.3.m3.1.1">𝑀</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p1.3.m3.1c">M</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p1.3.m3.1d">italic_M</annotation></semantics></math> tokens, respectively. Each session consists of 15–30 conversation turns between a user and an LLM chatbot. The user-LLM conversations span across 15 diverse topics, ranging from therapy and legal advice to recommendations on books, music, movies, and food; personal matters such as family, dating, health, and finance; and practical tasks like travel planning, online shopping, studying tips, and home decoration. In total, the benchmark features around 6<math alttext="k" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p1.4.m4.1"><semantics id="S2.SS0.SSS0.Px2.p1.4.m4.1a"><mi id="S2.SS0.SSS0.Px2.p1.4.m4.1.1" xref="S2.SS0.SSS0.Px2.p1.4.m4.1.1.cmml">k</mi><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p1.4.m4.1b"><ci id="S2.SS0.SSS0.Px2.p1.4.m4.1.1.cmml" xref="S2.SS0.SSS0.Px2.p1.4.m4.1.1">𝑘</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p1.4.m4.1c">k</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p1.4.m4.1d">italic_k</annotation></semantics></math> <em class="ltx_emph ltx_font_italic" id="S2.SS0.SSS0.Px2.p1.4.2">in-situ</em> user query and LLM response pairs across the 7 query types. We note that the size of our benchmark is not limited by the scalability of the synthetic data pipeline. We determine the size so that the cost for evaluation is reasonable. Cost analysis is discussed in § <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S3" title="3 Constructing Examples in PersonaMem At Scale ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">3</span></a>.</p>
+</div>
+<figure class="ltx_table" id="S2.T1">
+<div class="ltx_inline-block ltx_align_center ltx_transformed_outer" id="S2.T1.3" style="width:397.5pt;height:288.4pt;vertical-align:-0.9pt;"><span class="ltx_transformed_inner" style="transform:translate(-17.1pt,12.3pt) scale(0.920948652653171,0.920948652653171) ;">
+<table class="ltx_tabular ltx_align_middle" id="S2.T1.3.1">
+<tr class="ltx_tr" id="S2.T1.3.1.1">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_tt" id="S2.T1.3.1.1.1">
+<span class="ltx_inline-block ltx_align_top" id="S2.T1.3.1.1.1.1">
+<span class="ltx_p" id="S2.T1.3.1.1.1.1.1" style="width:95.4pt;"><span class="ltx_text ltx_font_bold" id="S2.T1.3.1.1.1.1.1.1">Query type</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_tt" id="S2.T1.3.1.1.2">
+<span class="ltx_inline-block ltx_align_top" id="S2.T1.3.1.1.2.1">
+<span class="ltx_p" id="S2.T1.3.1.1.2.1.1" style="width:312.2pt;"><span class="ltx_text ltx_font_bold" id="S2.T1.3.1.1.2.1.1.1">Examples of <span class="ltx_text ltx_font_italic" id="S2.T1.3.1.1.2.1.1.1.1">in-situ</span> user queries and chatbot responses</span></span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.3.1.2">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_t" id="S2.T1.3.1.2.1">
+<span class="ltx_inline-block ltx_align_top" id="S2.T1.3.1.2.1.1">
+<span class="ltx_p" id="S2.T1.3.1.2.1.1.1" style="width:95.4pt;"><span class="ltx_text ltx_font_bold" id="S2.T1.3.1.2.1.1.1.1" style="color:#000080;">[1] Recall user-shared facts</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_t" id="S2.T1.3.1.2.2">
+<span class="ltx_inline-block ltx_align_top" id="S2.T1.3.1.2.2.1">
+<span class="ltx_p" id="S2.T1.3.1.2.2.1.1" style="width:312.2pt;"><span class="ltx_text ltx_font_italic" id="S2.T1.3.1.2.2.1.1.1">”User: I shared my <span class="ltx_text" id="S2.T1.3.1.2.2.1.1.1.1" style="position:relative; bottom:0.0pt;background-color:#BCE394;">playlist</span> with my friends and they loved it. …… (later) User: What are some creative ways to share music? — Chatbot: Curating personalized <span class="ltx_text" id="S2.T1.3.1.2.2.1.1.1.2" style="background-color:#BCE394;">playlists</span> can be fun.”</span></span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.3.1.3">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_t" id="S2.T1.3.1.3.1">
+<span class="ltx_inline-block ltx_align_top" id="S2.T1.3.1.3.1.1">
+<span class="ltx_p" id="S2.T1.3.1.3.1.1.1" style="width:95.4pt;"><span class="ltx_text ltx_font_bold" id="S2.T1.3.1.3.1.1.1.1" style="color:#000080;">[2] Suggest new ideas</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_t" id="S2.T1.3.1.3.2">
+<span class="ltx_inline-block ltx_align_top" id="S2.T1.3.1.3.2.1">
+<span class="ltx_p" id="S2.T1.3.1.3.2.1.1" style="width:312.2pt;"><span class="ltx_text ltx_font_italic" id="S2.T1.3.1.3.2.1.1.1">”User: …… (later) User: Suggest new restaurant I <span class="ltx_text" id="S2.T1.3.1.3.2.1.1.1.1" style="background-color:#BCE394;">haven’t</span> ordered before.”</span></span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.3.1.4">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_t" id="S2.T1.3.1.4.1">
+<span class="ltx_inline-block ltx_align_top" id="S2.T1.3.1.4.1.1">
+<span class="ltx_p" id="S2.T1.3.1.4.1.1.1" style="width:95.4pt;"><span class="ltx_text ltx_font_bold" id="S2.T1.3.1.4.1.1.1.1" style="color:#000080;">[3] Acknowledge latest user preferences</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_t" id="S2.T1.3.1.4.2">
+<span class="ltx_inline-block ltx_align_top" id="S2.T1.3.1.4.2.1">
+<span class="ltx_p" id="S2.T1.3.1.4.2.1.1" style="width:312.2pt;"><span class="ltx_text ltx_font_italic" id="S2.T1.3.1.4.2.1.1.1">”User: I am a big fan of <span class="ltx_text" id="S2.T1.3.1.4.2.1.1.1.1" style="background-color:#FFA39B;">Italian</span> food. …… (later) User: I prefer <span class="ltx_text" id="S2.T1.3.1.4.2.1.1.1.2" style="background-color:#BCE394;">Mediterranean</span> cuisine now. … (later) User: I went to an Italian restaurant yesterday — Chatbot: Nice to hear! Though I thought you prefer <span class="ltx_text" id="S2.T1.3.1.4.2.1.1.1.3" style="background-color:#BCE394;">Mediterranean</span> food now.”</span></span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.3.1.5">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_t" id="S2.T1.3.1.5.1">
+<span class="ltx_inline-block ltx_align_top" id="S2.T1.3.1.5.1.1">
+<span class="ltx_p" id="S2.T1.3.1.5.1.1.1" style="width:95.4pt;"><span class="ltx_text ltx_font_bold" id="S2.T1.3.1.5.1.1.1.1" style="color:#000080;">[4] Track full preference evolution</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_t" id="S2.T1.3.1.5.2">
+<span class="ltx_inline-block ltx_align_top" id="S2.T1.3.1.5.2.1">
+<span class="ltx_p" id="S2.T1.3.1.5.2.1.1" style="width:312.2pt;"><span class="ltx_text ltx_font_italic" id="S2.T1.3.1.5.2.1.1.1">”User: …… (later) User: I am thinking about attending a cooking class. — Chatbot: I understand your perspective on cooking classes has evolved. Initially, you expressed a <span class="ltx_text" id="S2.T1.3.1.5.2.1.1.1.1" style="background-color:#FFA39B;">dislike</span>, but later you mentioned your <span class="ltx_text" id="S2.T1.3.1.5.2.1.1.1.2" style="background-color:#BCE394;">interest</span> in them.”</span></span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.3.1.6">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_t" id="S2.T1.3.1.6.1">
+<span class="ltx_inline-block ltx_align_top" id="S2.T1.3.1.6.1.1">
+<span class="ltx_p" id="S2.T1.3.1.6.1.1.1" style="width:95.4pt;"><span class="ltx_text ltx_font_bold" id="S2.T1.3.1.6.1.1.1.1" style="color:#000080;">[5] Revisit reasons behind preference updates</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_t" id="S2.T1.3.1.6.2">
+<span class="ltx_inline-block ltx_align_top" id="S2.T1.3.1.6.2.1">
+<span class="ltx_p" id="S2.T1.3.1.6.2.1.1" style="width:312.2pt;"><span class="ltx_text ltx_font_italic" id="S2.T1.3.1.6.2.1.1.1">”User: I am a big fan of Italian food. …… (later) User: I recently found I’m <span class="ltx_text" id="S2.T1.3.1.6.2.1.1.1.1" style="background-color:#BCE394;">allergic to gluten</span>, so I’ve shifted to other dishes. … (later) User: I went to an Italian restaurant yesterday — Chatbot: How’s your <span class="ltx_text" id="S2.T1.3.1.6.2.1.1.1.2" style="background-color:#BCE394;">allergy</span> been? I guess they must have a <span class="ltx_text" id="S2.T1.3.1.6.2.1.1.1.3" style="background-color:#BCE394;">gluten-free</span> pizza.”</span></span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.3.1.7">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_t" id="S2.T1.3.1.7.1">
+<span class="ltx_inline-block ltx_align_top" id="S2.T1.3.1.7.1.1">
+<span class="ltx_p" id="S2.T1.3.1.7.1.1.1" style="width:95.4pt;"><span class="ltx_text ltx_font_bold" id="S2.T1.3.1.7.1.1.1.1" style="color:#000080;">[6] Provide preference aligned recommendations</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_t" id="S2.T1.3.1.7.2">
+<span class="ltx_inline-block ltx_align_top" id="S2.T1.3.1.7.2.1">
+<span class="ltx_p" id="S2.T1.3.1.7.2.1.1" style="width:312.2pt;"><span class="ltx_text ltx_font_italic" id="S2.T1.3.1.7.2.1.1.1">User: I prefer <span class="ltx_text" id="S2.T1.3.1.7.2.1.1.1.1" style="background-color:#BCE394;">Mediterranean</span> seafood now. …… (later) User: How can I make impactful lifestyle changes? — Chatbot: How about diving into the <span class="ltx_text" id="S2.T1.3.1.7.2.1.1.1.2" style="background-color:#BCE394;">Mediterranean</span> diet plan?”</span></span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.3.1.8">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_bb ltx_border_t" id="S2.T1.3.1.8.1">
+<span class="ltx_inline-block ltx_align_top" id="S2.T1.3.1.8.1.1">
+<span class="ltx_p" id="S2.T1.3.1.8.1.1.1" style="width:95.4pt;"><span class="ltx_text ltx_font_bold" id="S2.T1.3.1.8.1.1.1.1" style="color:#000080;">[7] Generalize to new scenarios</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_bb ltx_border_t" id="S2.T1.3.1.8.2">
+<span class="ltx_inline-block ltx_align_top" id="S2.T1.3.1.8.2.1">
+<span class="ltx_p" id="S2.T1.3.1.8.2.1.1" style="width:312.2pt;"><span class="ltx_text ltx_font_italic" id="S2.T1.3.1.8.2.1.1.1">”User: I prefer my yoga class because of its <span class="ltx_text" id="S2.T1.3.1.8.2.1.1.1.1" style="background-color:#BCE394;">fixed weekly schedule</span>. …… (later) User: I recently haven’t had time to cook. — Chatbot: Since you seem to love <span class="ltx_text" id="S2.T1.3.1.8.2.1.1.1.2" style="background-color:#BCE394;">routine</span> would you be interested in weekly scheduled bento-box deliveries?”</span></span>
+</span>
+</td>
+</tr>
+</table>
+</span></div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 1: </span>Examples of the 7 types of <em class="ltx_emph ltx_font_italic" id="S2.T1.6.1">in-situ</em> user queries and expected chatbot response in the <img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="14" id="S2.T1.2.g1" src="extracted/6370758/figures/silhouette-emoji.png" width="13"/> <span class="ltx_text ltx_font_smallcaps" id="S2.T1.7.2">PersonaMem</span> benchmark. We highlight words that signal the user’s facts or preferences.</figcaption>
+</figure>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Constructing Examples in <img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="14" id="S3.1.g1" src="extracted/6370758/figures/silhouette-emoji.png" width="13"/> <span class="ltx_text ltx_font_smallcaps" id="S3.2.1">PersonaMem</span> At Scale</h2>
+<div class="ltx_para ltx_noindent" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">We develop a modular data curation pipeline—powered by GPT-4o <cite class="ltx_cite ltx_citemacro_citep">(Hurst et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib16" title="">2024</a>)</cite>—to synthesize persona-oriented, multi-session user–model conversations with long context. The pipeline minimizes irrelevant or randomly injected content to better evaluate how effectively LLM chatbots address the challenges outlined in Section <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S2" title="2 PersonaMem Benchmark: Overview ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">2</span></a>, while ensuring cost-effectiveness and scalability: generating data for each persona on each conversation topic costs approximately $2, independent of the context window length up to 1<math alttext="M" class="ltx_Math" display="inline" id="S3.p1.1.m1.1"><semantics id="S3.p1.1.m1.1a"><mi id="S3.p1.1.m1.1.1" xref="S3.p1.1.m1.1.1.cmml">M</mi><annotation-xml encoding="MathML-Content" id="S3.p1.1.m1.1b"><ci id="S3.p1.1.m1.1.1.cmml" xref="S3.p1.1.m1.1.1">𝑀</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.p1.1.m1.1c">M</annotation><annotation encoding="application/x-llamapun" id="S3.p1.1.m1.1d">italic_M</annotation></semantics></math> tokens.</p>
+</div>
+<section class="ltx_paragraph" id="S3.SS0.SSS0.Px1">
+<h4 class="ltx_title ltx_title_paragraph">Constructe user profile and persona.</h4>
+<div class="ltx_para ltx_noindent" id="S3.SS0.SSS0.Px1.p1">
+<p class="ltx_p" id="S3.SS0.SSS0.Px1.p1.1">We sample a set of random personas from PersonaHub <cite class="ltx_cite ltx_citemacro_citep">(Ge et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib11" title="">2024</a>)</cite>, each comprising about one to three sentences, and augment them with additional demographic information and extended personal details. We also construct a timeline and populate it with events that align with the persona. These events serve as the <span class="ltx_text ltx_font_italic" id="S3.SS0.SSS0.Px1.p1.1.1">general personal history</span>, such as education, career development, and life experiences, to provide a richer context. The prompts used in the process can be found in Appendix <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#A3" title="Appendix C Prompts Used in PersonaMem Dataset Generation ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">C</span></a>.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.SS0.SSS0.Px1.p2">
+<p class="ltx_p" id="S3.SS0.SSS0.Px1.p2.1">Building on the persona and general personal history, we generate one additional <span class="ltx_text ltx_font_italic" id="S3.SS0.SSS0.Px1.p2.1.1">topic-specific personal history</span> for each conversation topic. Under each topic, we define a set of initial preferences, ensuring no overlap across different topics. Each topic-specific history includes events, timestamps, associated preferences, potential updates to those preferences, and the underlying reasons for those changes. This approach ensures a coherent progression of user experiences while maintaining a strong connection to their personas.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.SS0.SSS0.Px1.p3">
+<p class="ltx_p" id="S3.SS0.SSS0.Px1.p3.1">The structured personal histories also facilitate the curation of question–answer pairs. We leverage short-form information within these histories to extract ground-truth user profiles and preferences at any specific time, ensuring that the correct answers are both event- and persona-grounded. In contrast, distractor options, while generally reasonable, either overlook the user’s persona or contradict it. Additionally, we exclude all questions that the model can answer correctly without seeing any contextual information from the benchmark.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S3.SS0.SSS0.Px2">
+<h4 class="ltx_title ltx_title_paragraph">Simulate conversation sessions from user profile.</h4>
+<div class="ltx_para ltx_noindent" id="S3.SS0.SSS0.Px2.p1">
+<p class="ltx_p" id="S3.SS0.SSS0.Px2.p1.1">We divide the timeline into multiple segments, resulting in segments of personal histories that follow a causal, chronological order. Each segment is then expanded into a full user–model conversation session, designed to cover all details of the corresponding topic-specific personal history segment, together with additional storytelling context as if the user is talking with a chatbot naturally. For example, under the therapy consultation topic, we frame the interaction as a user seeking guidance from an AI therapist.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.SS0.SSS0.Px2.p2">
+<p class="ltx_p" id="S3.SS0.SSS0.Px2.p2.1">To enhance the quality of the conversations, we incorporate several tricks: (1) Before generating each user–model interaction turn, we prompt GPT-4o to first identify and cite the relevant event from the personal history. These citations serve as internal guidance and are not included in the final evaluation data. (2) Since GPT-4o may miss some events, leading to incomplete preference update sequences, we employ a self-reflection mechanism. We ask GPT-4o to review the generated conversation and identify any missing events from the personal history, ensuring better coverage and coherence across the interaction.</p>
+</div>
+<figure class="ltx_figure" id="S3.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="405" id="S3.F2.g1" src="x2.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span><span class="ltx_text ltx_font_bold" id="S3.F2.2.1">An overview of the persona-oriented multi-session data curation process</span>. We construct user personas, build time-stamped general and topic-specific personal histories, expand them into conversation sessions, and topologically concatenate sessions to create long conversation contexts—resulting in a scalable generation framework.</figcaption>
+</figure>
+</section>
+<section class="ltx_paragraph" id="S3.SS0.SSS0.Px3">
+<h4 class="ltx_title ltx_title_paragraph">Assemble interaction history via session concatenation.</h4>
+<div class="ltx_para ltx_noindent" id="S3.SS0.SSS0.Px3.p1">
+<p class="ltx_p" id="S3.SS0.SSS0.Px3.p1.1">Generating large-scale, persona-oriented long-context conversations can be both <span class="ltx_text ltx_font_italic" id="S3.SS0.SSS0.Px3.p1.1.1">cost-efficient</span> and <span class="ltx_text ltx_font_italic" id="S3.SS0.SSS0.Px3.p1.1.2">scalable</span>. For each persona, we topologically sort conversation sessions based on their ending timestamps, and we only need to make sure sessions within the same topic maintain causality. <span class="ltx_text ltx_font_italic" id="S3.SS0.SSS0.Px3.p1.1.3">Different numbers of sessions can be concatenated in multiple valid orders.</span> This flexible design allows for multiple valid interleavings of sessions across different topics, meaning <span class="ltx_text ltx_font_italic" id="S3.SS0.SSS0.Px3.p1.1.4">we only need to generate sessions themselves—not every entire long-context conversation from scratch.</span> To further extend context length and simulate more natural interactions, we insert a limited number of short interactions between sessions where the user asks random knowledge questions or programming helps without indicating any user preferences.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S3.SS0.SSS0.Px4">
+<h4 class="ltx_title ltx_title_paragraph">Human validation on dataset quality.</h4>
+<div class="ltx_para ltx_noindent" id="S3.SS0.SSS0.Px4.p1">
+<p class="ltx_p" id="S3.SS0.SSS0.Px4.p1.1">To evaluate the quality of our generated data, we conduct a human study on 90 random query–response pairs from <span class="ltx_text ltx_font_smallcaps" id="S3.SS0.SSS0.Px4.p1.1.1">PersonaMem</span>, each grounded in user persona, personal histories, and associated utterances in conversation. Three annotators assess each Q&amp;A pair across four dimensions: appropriateness, relevance, correctness, and best response. Judgments were very high for all dimensions – 97.8%, 95.6%, 97.8%, and 90.0% respectively. Further details are provided in Appendix <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#A1" title="Appendix A Details on Human Evaluation ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">A</span></a>.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Experiment</h2>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Evaluation Settings</h3>
+<div class="ltx_para ltx_noindent" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.1">Given an <span class="ltx_text ltx_font_italic" id="S4.SS1.p1.1.1">in-situ</span> user query and the user’s interaction history up to a point in time, we evaluate models’ ability to select the most appropriate response according to the current state of the user amonst four different choices. Only one of the choices fits the user’s current status, and the other choices contain either irrelevant or outdated facts or preferences from the user.
+During evaluation, apart from the conversation history, the models have access to the basic demographic information of the user, including name, age, gender identity, racial identity, and occupation. The models do not have direct access to the user’s other dynamic characteristics and personal history otherwise.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S4.SS1.p2">
+<p class="ltx_p" id="S4.SS1.p2.1">For selecting the most appropriate response, we evaluate models under both discriminative and generative settings. In the <span class="ltx_text ltx_font_italic" id="S4.SS1.p2.1.1">discriminative setting</span>, the models are presented with all four response choices denoted with (a), (b), (c) and (d) with random ordering among the choices. The model is asked to output the correct choice along with a brief explanation.
+In the <span class="ltx_text ltx_font_italic" id="S4.SS1.p2.1.2">generative setting</span>, the models still see one question at a time. We compute the log-sum of token probability of generating each option individually with length normalization, and select the option with the highest probability as the model response. We use the <span class="ltx_text ltx_font_italic" id="S4.SS1.p2.1.3">discriminative setting</span> for main evaluation (§ <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.SS2" title="4.2 Evaluating Language Models in Long-Context Settings ‣ 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">4.2</span></a>,§ <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.SS3" title="4.3 Effect from the Position of User Information in Interaction History ‣ 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">4.3</span></a>, § <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.SS4" title="4.4 Evaluation with External Memory Modules ‣ 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">4.4</span></a>) and adopt the <span class="ltx_text ltx_font_italic" id="S4.SS1.p2.1.4">generative</span> setting in § <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.SS5" title="4.5 Evaluation of Language Models in Generative Settings ‣ 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">4.5</span></a>, as it requires access to logits over entire vocabulary during decoding, which is not available from most proprietary models. No LLM judges are involved in the evaluation process.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Evaluating Language Models in Long-Context Settings</h3>
+<div class="ltx_para ltx_noindent" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.2">We first evaluate language models in the long-context setting, where the full user-LLM interaction history is provided as input to the models. Due to the length of the history, all models here were evaluated zero-shot, without demonstration examples of other histories and user queries.
+Our evaluation covers GPT-4.1, o4-mini, o3-mini, GPT-4.5, o1, GPT-4o, GPT-4o-mini, Gemini-2.0-Flash, Gemini-2.0-Flash-Lite, Gemini-1.5-Flash, DeepSeek-R1-671B, Llama-4-Maverick, Llama-3.1-405B, Claude-3.7-Sonnet, and Claude-3.5-Haiku <cite class="ltx_cite ltx_citemacro_citep">(OpenAI, <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib33" title="">2025a</a>; <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib32" title="">2024b</a>; <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib34" title="">b</a>; <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib31" title="">2024a</a>; Hurst et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib16" title="">2024</a>; Team et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib44" title="">2024</a>; Guo et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib13" title="">2025</a>; Grattafiori et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib12" title="">2024</a>; Anthropic, <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib4" title="">2024</a>)</cite> on 128<math alttext="k" class="ltx_Math" display="inline" id="S4.SS2.p1.1.m1.1"><semantics id="S4.SS2.p1.1.m1.1a"><mi id="S4.SS2.p1.1.m1.1.1" xref="S4.SS2.p1.1.m1.1.1.cmml">k</mi><annotation-xml encoding="MathML-Content" id="S4.SS2.p1.1.m1.1b"><ci id="S4.SS2.p1.1.m1.1.1.cmml" xref="S4.SS2.p1.1.m1.1.1">𝑘</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS2.p1.1.m1.1c">k</annotation><annotation encoding="application/x-llamapun" id="S4.SS2.p1.1.m1.1d">italic_k</annotation></semantics></math>-token context windows. We also evaluate models that support longer contexts—Llama-4-Maverick, Gemini-2.0-Flash, Gemini-2.0-Flash-Lite, and Gemini-1.5-Flash—on 1<math alttext="M" class="ltx_Math" display="inline" id="S4.SS2.p1.2.m2.1"><semantics id="S4.SS2.p1.2.m2.1a"><mi id="S4.SS2.p1.2.m2.1.1" xref="S4.SS2.p1.2.m2.1.1.cmml">M</mi><annotation-xml encoding="MathML-Content" id="S4.SS2.p1.2.m2.1b"><ci id="S4.SS2.p1.2.m2.1.1.cmml" xref="S4.SS2.p1.2.m2.1.1">𝑀</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS2.p1.2.m2.1c">M</annotation><annotation encoding="application/x-llamapun" id="S4.SS2.p1.2.m2.1d">italic_M</annotation></semantics></math>-token context windows.
+We report the following findings:</p>
+</div>
+<figure class="ltx_figure" id="S4.F3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="156" id="S4.F3.g1" src="x3.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>Evaluation results across different models on 7 <em class="ltx_emph ltx_font_italic" id="S4.F3.2.1">in-situ</em> query types.
+We observe models perform reasonably well at recalling user facts and preferences. However, models struggle at providing novel suggestions, or applying users’ preferences in new scenarios.</figcaption>
+</figure>
+<figure class="ltx_figure" id="S4.F4"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="437" id="S4.F4.g1" src="x4.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 4: </span>Model performances by number of sessions elapsed since most recent preferences were mentioned in long context. Top: up to 20 sessions/128k tokens; Bottom: up to 60 sessions/1M tokens. Long-context retrieval is important for personalization in practice.</figcaption>
+</figure>
+<section class="ltx_paragraph" id="S4.SS2.SSS0.Px1">
+<h4 class="ltx_title ltx_title_paragraph">GPT-4.5, GPT-4.1, and Gemini-1.5 achieve the highest overall performance.</h4>
+<div class="ltx_para ltx_noindent" id="S4.SS2.SSS0.Px1.p1">
+<p class="ltx_p" id="S4.SS2.SSS0.Px1.p1.1">Among leading foundation models, GPT-4.5 and Gemini-1.5 outperform others in overall accuracy. However, their performance still hovers around 52% in a multiple-choice setting, highlighting substantial room for improvement. <span class="ltx_text ltx_font_bold" id="S4.SS2.SSS0.Px1.p1.1.1">Notably, reasoning models such as o1, o3-mini, o4-mini, and DeepSeek-R1-607B do not demonstrate competitive advantages over non-reasoning models in the personalization tasks we evaluate.</span></p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S4.SS2.SSS0.Px2">
+<h4 class="ltx_title ltx_title_paragraph">LLMs demonstrate reasonably good performance in recalling simple user facts.</h4>
+<div class="ltx_para ltx_noindent" id="S4.SS2.SSS0.Px2.p1">
+<p class="ltx_p" id="S4.SS2.SSS0.Px2.p1.1">For tasks involving the retrieval of static user information, such as previously mentioned items, activities, or reasons behind preference changes where the reasons themselves won’t change, most LLMs have a reasonable chance of succeeding.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S4.SS2.SSS0.Px3">
+<h4 class="ltx_title ltx_title_paragraph">Incorporating the latest user preference into responses is more challenging than recalling the change in user profile.</h4>
+<div class="ltx_para ltx_noindent" id="S4.SS2.SSS0.Px3.p1">
+<p class="ltx_p" id="S4.SS2.SSS0.Px3.p1.1">We observe that models struggle to incorporate the latest preference or state of the user in responses. Surprisingly, models generally get higher performance when asked to recall how the user preferences evolve over time.
+We observe that asking the model to iterate through all preference updates may encourage it to think through the preference evolutions, often making the task easier.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S4.SS2.SSS0.Px4">
+<h4 class="ltx_title ltx_title_paragraph">Models fall short on generating new ideas or providing suggestions in new scenarios.</h4>
+<div class="ltx_para ltx_noindent" id="S4.SS2.SSS0.Px4.p1">
+<p class="ltx_p" id="S4.SS2.SSS0.Px4.p1.1">As shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.F3" title="Figure 3 ‣ 4.2 Evaluating Language Models in Long-Context Settings ‣ 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">3</span></a>, tasks such as <span class="ltx_text ltx_font_italic" id="S4.SS2.SSS0.Px4.p1.1.1">”Suggest New Ideas</span>”, <span class="ltx_text ltx_font_italic" id="S4.SS2.SSS0.Px4.p1.1.2">”Provide Preference-Aligned Recommendations”</span>, and <span class="ltx_text ltx_font_italic" id="S4.SS2.SSS0.Px4.p1.1.3">”Generalize Reasons to New Scenarios”</span> yield the lowest performance across all models, highlighting the challenge of generating personalized responses in novel contexts—particularly when identifying new facts.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S4.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.3 </span>Effect from the Position of User Information in Interaction History</h3>
+<div class="ltx_para ltx_noindent" id="S4.SS3.p1">
+<p class="ltx_p" id="S4.SS3.p1.1">To understand how the model performance is affected by the position in which the relevant user facts or preferences appear in the conversation history, we report the model performance by the session in which the relevant user information appears in the history. The results are shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.F4" title="Figure 4 ‣ 4.2 Evaluating Language Models in Long-Context Settings ‣ 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">4</span></a>. Generally, we observe that the model performs better when the relevant information appears in the earler or later sessions of the conversation history. The findings here generally echo previous findings on long-context inputs to models, where context information tends to get “lost in the middle” <cite class="ltx_cite ltx_citemacro_citep">(Liu et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib26" title="">2024</a>; Wu et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib48" title="">2024</a>)</cite>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.4 </span>Evaluation with External Memory Modules</h3>
+<figure class="ltx_figure" id="S4.F5"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="219" id="S4.F5.g1" src="x5.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 5: </span>Performance on different question types for GPT-4o and GPT-4o-mini with 32k-token contexts. We compare vanilla models to the ones with Mem0 and RAG setups.</figcaption>
+</figure>
+<div class="ltx_para ltx_noindent" id="S4.SS4.p1">
+<p class="ltx_p" id="S4.SS4.p1.1">We evaluate whether using a retriever to identify relevant information in the history will help improve model’s performance.
+We evaluate two external memory approaches—RAG <cite class="ltx_cite ltx_citemacro_citep">(Lewis et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib23" title="">2020</a>)</cite> and Mem0 <cite class="ltx_cite ltx_citemacro_citep">(Mem0, <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib28" title="">2024</a>)</cite>—against vanilla LLMs. For these experiments, we consider only the GPT-4o and GPT-4o-mini models.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S4.SS4.p2">
+<p class="ltx_p" id="S4.SS4.p2.1">For RAG, we consider a straightforward implementation that retrieves the top five most relevant messages per question using dense BGE-M3 embeddings <cite class="ltx_cite ltx_citemacro_citep">(Chen et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib8" title="">2024</a>)</cite>. For Mem0 which provides an additional memory layer to LLMs, we iteratively build a memory database using LLM-generated facts over each turn. At inference, we retrieve the top 5 relevant facts per question. For efficiency, we use 32k-token contexts for evaluation.</p>
+</div>
+<section class="ltx_paragraph" id="S4.SS4.SSS0.Px1">
+<h4 class="ltx_title ltx_title_paragraph">Retriever-based memory module can improve model performance. </h4>
+<div class="ltx_para ltx_noindent" id="S4.SS4.SSS0.Px1.p1">
+<p class="ltx_p" id="S4.SS4.SSS0.Px1.p1.1">Overall, external memory modules significantly improve accuracy for both models. Notably, <span class="ltx_text ltx_font_italic" id="S4.SS4.SSS0.Px1.p1.1.1">Recall User-Shared Facts</span> and <span class="ltx_text ltx_font_italic" id="S4.SS4.SSS0.Px1.p1.1.2">Generalize to New Scenarios</span> benefit the most, highlighting the effectiveness of retrieval in factual tasks. In contrast, <span class="ltx_text ltx_font_italic" id="S4.SS4.SSS0.Px1.p1.1.3">Revisit Reasons Behind Preference Updates</span> shows smaller gains. RAG consistently outperforms Mem0 across most question types, although Mem0 is more computational expensive, suggesting that retrieving semantically similar messages is more effective for personalized reasoning.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S4.SS5">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.5 </span>Evaluation of Language Models in Generative Settings</h3>
+<div class="ltx_para ltx_noindent" id="S4.SS5.p1">
+<p class="ltx_p" id="S4.SS5.p1.1">In real-world use cases, the chatbots do not have access to the potential options of responses during inference. For such reason, we additionally evaluate models on the more realistic <em class="ltx_emph ltx_font_italic" id="S4.SS5.p1.1.1">generative</em> settings, where the model sees only one option at a time, and the best response is selected by the joint sequence probability of options from model predictions.</p>
+</div>
+<section class="ltx_paragraph" id="S4.SS5.SSS0.Px1">
+<h4 class="ltx_title ltx_title_paragraph">Approaches.</h4>
+<div class="ltx_para ltx_noindent" id="S4.SS5.SSS0.Px1.p1">
+<p class="ltx_p" id="S4.SS5.SSS0.Px1.p1.5">Given the user-LLM history and in-situ user query, we compare the joint sequence probabilities by taking the log-sum of the token-level probability of each response option.
+Specifically, given a conversation history (denoted as <math alttext="\mathcal{C}" class="ltx_Math" display="inline" id="S4.SS5.SSS0.Px1.p1.1.m1.1"><semantics id="S4.SS5.SSS0.Px1.p1.1.m1.1a"><mi class="ltx_font_mathcaligraphic" id="S4.SS5.SSS0.Px1.p1.1.m1.1.1" xref="S4.SS5.SSS0.Px1.p1.1.m1.1.1.cmml">𝒞</mi><annotation-xml encoding="MathML-Content" id="S4.SS5.SSS0.Px1.p1.1.m1.1b"><ci id="S4.SS5.SSS0.Px1.p1.1.m1.1.1.cmml" xref="S4.SS5.SSS0.Px1.p1.1.m1.1.1">𝒞</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS5.SSS0.Px1.p1.1.m1.1c">\mathcal{C}</annotation><annotation encoding="application/x-llamapun" id="S4.SS5.SSS0.Px1.p1.1.m1.1d">caligraphic_C</annotation></semantics></math>) and the user query (<math alttext="q" class="ltx_Math" display="inline" id="S4.SS5.SSS0.Px1.p1.2.m2.1"><semantics id="S4.SS5.SSS0.Px1.p1.2.m2.1a"><mi id="S4.SS5.SSS0.Px1.p1.2.m2.1.1" xref="S4.SS5.SSS0.Px1.p1.2.m2.1.1.cmml">q</mi><annotation-xml encoding="MathML-Content" id="S4.SS5.SSS0.Px1.p1.2.m2.1b"><ci id="S4.SS5.SSS0.Px1.p1.2.m2.1.1.cmml" xref="S4.SS5.SSS0.Px1.p1.2.m2.1.1">𝑞</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS5.SSS0.Px1.p1.2.m2.1c">q</annotation><annotation encoding="application/x-llamapun" id="S4.SS5.SSS0.Px1.p1.2.m2.1d">italic_q</annotation></semantics></math>), we evaluate each candidate response <math alttext="r_{i\in\{1,2,3,4\}}" class="ltx_Math" display="inline" id="S4.SS5.SSS0.Px1.p1.3.m3.4"><semantics id="S4.SS5.SSS0.Px1.p1.3.m3.4a"><msub id="S4.SS5.SSS0.Px1.p1.3.m3.4.5" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.5.cmml"><mi id="S4.SS5.SSS0.Px1.p1.3.m3.4.5.2" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.5.2.cmml">r</mi><mrow id="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.cmml"><mi id="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.6" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.6.cmml">i</mi><mo id="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.5" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.5.cmml">∈</mo><mrow id="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.7.2" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.7.1.cmml"><mo id="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.7.2.1" stretchy="false" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.7.1.cmml">{</mo><mn id="S4.SS5.SSS0.Px1.p1.3.m3.1.1.1.1" xref="S4.SS5.SSS0.Px1.p1.3.m3.1.1.1.1.cmml">1</mn><mo id="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.7.2.2" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.7.1.cmml">,</mo><mn id="S4.SS5.SSS0.Px1.p1.3.m3.2.2.2.2" xref="S4.SS5.SSS0.Px1.p1.3.m3.2.2.2.2.cmml">2</mn><mo id="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.7.2.3" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.7.1.cmml">,</mo><mn id="S4.SS5.SSS0.Px1.p1.3.m3.3.3.3.3" xref="S4.SS5.SSS0.Px1.p1.3.m3.3.3.3.3.cmml">3</mn><mo id="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.7.2.4" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.7.1.cmml">,</mo><mn id="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.4" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.4.cmml">4</mn><mo id="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.7.2.5" stretchy="false" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.7.1.cmml">}</mo></mrow></mrow></msub><annotation-xml encoding="MathML-Content" id="S4.SS5.SSS0.Px1.p1.3.m3.4b"><apply id="S4.SS5.SSS0.Px1.p1.3.m3.4.5.cmml" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.5"><csymbol cd="ambiguous" id="S4.SS5.SSS0.Px1.p1.3.m3.4.5.1.cmml" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.5">subscript</csymbol><ci id="S4.SS5.SSS0.Px1.p1.3.m3.4.5.2.cmml" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.5.2">𝑟</ci><apply id="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.cmml" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4"><in id="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.5.cmml" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.5"></in><ci id="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.6.cmml" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.6">𝑖</ci><set id="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.7.1.cmml" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.7.2"><cn id="S4.SS5.SSS0.Px1.p1.3.m3.1.1.1.1.cmml" type="integer" xref="S4.SS5.SSS0.Px1.p1.3.m3.1.1.1.1">1</cn><cn id="S4.SS5.SSS0.Px1.p1.3.m3.2.2.2.2.cmml" type="integer" xref="S4.SS5.SSS0.Px1.p1.3.m3.2.2.2.2">2</cn><cn id="S4.SS5.SSS0.Px1.p1.3.m3.3.3.3.3.cmml" type="integer" xref="S4.SS5.SSS0.Px1.p1.3.m3.3.3.3.3">3</cn><cn id="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.4.cmml" type="integer" xref="S4.SS5.SSS0.Px1.p1.3.m3.4.4.4.4">4</cn></set></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS5.SSS0.Px1.p1.3.m3.4c">r_{i\in\{1,2,3,4\}}</annotation><annotation encoding="application/x-llamapun" id="S4.SS5.SSS0.Px1.p1.3.m3.4d">italic_r start_POSTSUBSCRIPT italic_i ∈ { 1 , 2 , 3 , 4 } end_POSTSUBSCRIPT</annotation></semantics></math>, consisting of tokens <math alttext="\{x_{i}^{1},x_{i}^{2},\dots,x_{i}^{T_{l}}\}" class="ltx_Math" display="inline" id="S4.SS5.SSS0.Px1.p1.4.m4.4"><semantics id="S4.SS5.SSS0.Px1.p1.4.m4.4a"><mrow id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.4.cmml"><mo id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.4" stretchy="false" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.4.cmml">{</mo><msubsup id="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1" xref="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.cmml"><mi id="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.2.2" xref="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.2.2.cmml">x</mi><mi id="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.2.3" xref="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.2.3.cmml">i</mi><mn id="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.3" xref="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.3.cmml">1</mn></msubsup><mo id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.5" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.4.cmml">,</mo><msubsup id="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2" xref="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.cmml"><mi id="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.2.2" xref="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.2.2.cmml">x</mi><mi id="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.2.3" xref="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.2.3.cmml">i</mi><mn id="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.3" xref="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.3.cmml">2</mn></msubsup><mo id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.6" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.4.cmml">,</mo><mi id="S4.SS5.SSS0.Px1.p1.4.m4.1.1" mathvariant="normal" xref="S4.SS5.SSS0.Px1.p1.4.m4.1.1.cmml">…</mi><mo id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.7" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.4.cmml">,</mo><msubsup id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.cmml"><mi id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.2.2" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.2.2.cmml">x</mi><mi id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.2.3" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.2.3.cmml">i</mi><msub id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.3" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.3.cmml"><mi id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.3.2" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.3.2.cmml">T</mi><mi id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.3.3" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.3.3.cmml">l</mi></msub></msubsup><mo id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.8" stretchy="false" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.4.cmml">}</mo></mrow><annotation-xml encoding="MathML-Content" id="S4.SS5.SSS0.Px1.p1.4.m4.4b"><set id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.4.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3"><apply id="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1"><csymbol cd="ambiguous" id="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.1.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1">superscript</csymbol><apply id="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.2.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1"><csymbol cd="ambiguous" id="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.2.1.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1">subscript</csymbol><ci id="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.2.2.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.2.2">𝑥</ci><ci id="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.2.3.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.2.3">𝑖</ci></apply><cn id="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.3.cmml" type="integer" xref="S4.SS5.SSS0.Px1.p1.4.m4.2.2.1.1.3">1</cn></apply><apply id="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2"><csymbol cd="ambiguous" id="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.1.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2">superscript</csymbol><apply id="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.2.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2"><csymbol cd="ambiguous" id="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.2.1.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2">subscript</csymbol><ci id="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.2.2.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.2.2">𝑥</ci><ci id="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.2.3.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.2.3">𝑖</ci></apply><cn id="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.3.cmml" type="integer" xref="S4.SS5.SSS0.Px1.p1.4.m4.3.3.2.2.3">2</cn></apply><ci id="S4.SS5.SSS0.Px1.p1.4.m4.1.1.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.1.1">…</ci><apply id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3"><csymbol cd="ambiguous" id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.1.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3">superscript</csymbol><apply id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.2.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3"><csymbol cd="ambiguous" id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.2.1.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3">subscript</csymbol><ci id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.2.2.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.2.2">𝑥</ci><ci id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.2.3.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.2.3">𝑖</ci></apply><apply id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.3.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.3"><csymbol cd="ambiguous" id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.3.1.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.3">subscript</csymbol><ci id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.3.2.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.3.2">𝑇</ci><ci id="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.3.3.cmml" xref="S4.SS5.SSS0.Px1.p1.4.m4.4.4.3.3.3.3">𝑙</ci></apply></apply></set></annotation-xml><annotation encoding="application/x-tex" id="S4.SS5.SSS0.Px1.p1.4.m4.4c">\{x_{i}^{1},x_{i}^{2},\dots,x_{i}^{T_{l}}\}</annotation><annotation encoding="application/x-llamapun" id="S4.SS5.SSS0.Px1.p1.4.m4.4d">{ italic_x start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT 1 end_POSTSUPERSCRIPT , italic_x start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT 2 end_POSTSUPERSCRIPT , … , italic_x start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_T start_POSTSUBSCRIPT italic_l end_POSTSUBSCRIPT end_POSTSUPERSCRIPT }</annotation></semantics></math> of total token length <math alttext="l" class="ltx_Math" display="inline" id="S4.SS5.SSS0.Px1.p1.5.m5.1"><semantics id="S4.SS5.SSS0.Px1.p1.5.m5.1a"><mi id="S4.SS5.SSS0.Px1.p1.5.m5.1.1" xref="S4.SS5.SSS0.Px1.p1.5.m5.1.1.cmml">l</mi><annotation-xml encoding="MathML-Content" id="S4.SS5.SSS0.Px1.p1.5.m5.1b"><ci id="S4.SS5.SSS0.Px1.p1.5.m5.1.1.cmml" xref="S4.SS5.SSS0.Px1.p1.5.m5.1.1">𝑙</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS5.SSS0.Px1.p1.5.m5.1c">l</annotation><annotation encoding="application/x-llamapun" id="S4.SS5.SSS0.Px1.p1.5.m5.1d">italic_l</annotation></semantics></math>. Due to the <span class="ltx_text ltx_font_italic" id="S4.SS5.SSS0.Px1.p1.5.1">autoregressive</span> nature of causal language models, the joint log probability for each query-answer pair is computed by summing the conditional log probabilities of each token given its preceding context, formalized as</p>
+<table class="ltx_equation ltx_eqn_table" id="S4.Ex1">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\log P(r_{i}\mid\mathcal{C},q)=\sum_{t=1}^{T_{i}}\log P(x_{i}^{t}\mid\mathcal{%
+C},q,x_{i}^{1},\dots,x_{i}^{t-1})/T_{i}" class="ltx_Math" display="block" id="S4.Ex1.m1.7"><semantics id="S4.Ex1.m1.7a"><mrow id="S4.Ex1.m1.7.7" xref="S4.Ex1.m1.7.7.cmml"><mrow id="S4.Ex1.m1.6.6.1" xref="S4.Ex1.m1.6.6.1.cmml"><mrow id="S4.Ex1.m1.6.6.1.3" xref="S4.Ex1.m1.6.6.1.3.cmml"><mi id="S4.Ex1.m1.6.6.1.3.1" xref="S4.Ex1.m1.6.6.1.3.1.cmml">log</mi><mo id="S4.Ex1.m1.6.6.1.3a" lspace="0.167em" xref="S4.Ex1.m1.6.6.1.3.cmml">⁡</mo><mi id="S4.Ex1.m1.6.6.1.3.2" xref="S4.Ex1.m1.6.6.1.3.2.cmml">P</mi></mrow><mo id="S4.Ex1.m1.6.6.1.2" xref="S4.Ex1.m1.6.6.1.2.cmml">⁢</mo><mrow id="S4.Ex1.m1.6.6.1.1.1" xref="S4.Ex1.m1.6.6.1.1.1.1.cmml"><mo id="S4.Ex1.m1.6.6.1.1.1.2" stretchy="false" xref="S4.Ex1.m1.6.6.1.1.1.1.cmml">(</mo><mrow id="S4.Ex1.m1.6.6.1.1.1.1" xref="S4.Ex1.m1.6.6.1.1.1.1.cmml"><msub id="S4.Ex1.m1.6.6.1.1.1.1.2" xref="S4.Ex1.m1.6.6.1.1.1.1.2.cmml"><mi id="S4.Ex1.m1.6.6.1.1.1.1.2.2" xref="S4.Ex1.m1.6.6.1.1.1.1.2.2.cmml">r</mi><mi id="S4.Ex1.m1.6.6.1.1.1.1.2.3" xref="S4.Ex1.m1.6.6.1.1.1.1.2.3.cmml">i</mi></msub><mo id="S4.Ex1.m1.6.6.1.1.1.1.1" xref="S4.Ex1.m1.6.6.1.1.1.1.1.cmml">∣</mo><mrow id="S4.Ex1.m1.6.6.1.1.1.1.3.2" xref="S4.Ex1.m1.6.6.1.1.1.1.3.1.cmml"><mi class="ltx_font_mathcaligraphic" id="S4.Ex1.m1.1.1" xref="S4.Ex1.m1.1.1.cmml">𝒞</mi><mo id="S4.Ex1.m1.6.6.1.1.1.1.3.2.1" xref="S4.Ex1.m1.6.6.1.1.1.1.3.1.cmml">,</mo><mi id="S4.Ex1.m1.2.2" xref="S4.Ex1.m1.2.2.cmml">q</mi></mrow></mrow><mo id="S4.Ex1.m1.6.6.1.1.1.3" stretchy="false" xref="S4.Ex1.m1.6.6.1.1.1.1.cmml">)</mo></mrow></mrow><mo id="S4.Ex1.m1.7.7.3" rspace="0.111em" xref="S4.Ex1.m1.7.7.3.cmml">=</mo><mrow id="S4.Ex1.m1.7.7.2" xref="S4.Ex1.m1.7.7.2.cmml"><munderover id="S4.Ex1.m1.7.7.2.2" xref="S4.Ex1.m1.7.7.2.2.cmml"><mo id="S4.Ex1.m1.7.7.2.2.2.2" movablelimits="false" xref="S4.Ex1.m1.7.7.2.2.2.2.cmml">∑</mo><mrow id="S4.Ex1.m1.7.7.2.2.2.3" xref="S4.Ex1.m1.7.7.2.2.2.3.cmml"><mi id="S4.Ex1.m1.7.7.2.2.2.3.2" xref="S4.Ex1.m1.7.7.2.2.2.3.2.cmml">t</mi><mo id="S4.Ex1.m1.7.7.2.2.2.3.1" xref="S4.Ex1.m1.7.7.2.2.2.3.1.cmml">=</mo><mn id="S4.Ex1.m1.7.7.2.2.2.3.3" xref="S4.Ex1.m1.7.7.2.2.2.3.3.cmml">1</mn></mrow><msub id="S4.Ex1.m1.7.7.2.2.3" xref="S4.Ex1.m1.7.7.2.2.3.cmml"><mi id="S4.Ex1.m1.7.7.2.2.3.2" xref="S4.Ex1.m1.7.7.2.2.3.2.cmml">T</mi><mi id="S4.Ex1.m1.7.7.2.2.3.3" xref="S4.Ex1.m1.7.7.2.2.3.3.cmml">i</mi></msub></munderover><mrow id="S4.Ex1.m1.7.7.2.1" xref="S4.Ex1.m1.7.7.2.1.cmml"><mrow id="S4.Ex1.m1.7.7.2.1.1" xref="S4.Ex1.m1.7.7.2.1.1.cmml"><mrow id="S4.Ex1.m1.7.7.2.1.1.3" xref="S4.Ex1.m1.7.7.2.1.1.3.cmml"><mi id="S4.Ex1.m1.7.7.2.1.1.3.1" xref="S4.Ex1.m1.7.7.2.1.1.3.1.cmml">log</mi><mo id="S4.Ex1.m1.7.7.2.1.1.3a" lspace="0.167em" xref="S4.Ex1.m1.7.7.2.1.1.3.cmml">⁡</mo><mi id="S4.Ex1.m1.7.7.2.1.1.3.2" xref="S4.Ex1.m1.7.7.2.1.1.3.2.cmml">P</mi></mrow><mo id="S4.Ex1.m1.7.7.2.1.1.2" xref="S4.Ex1.m1.7.7.2.1.1.2.cmml">⁢</mo><mrow id="S4.Ex1.m1.7.7.2.1.1.1.1" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.cmml"><mo id="S4.Ex1.m1.7.7.2.1.1.1.1.2" stretchy="false" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.cmml">(</mo><mrow id="S4.Ex1.m1.7.7.2.1.1.1.1.1" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.cmml"><msubsup id="S4.Ex1.m1.7.7.2.1.1.1.1.1.4" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.cmml"><mi id="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.2.2" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.2.2.cmml">x</mi><mi id="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.2.3" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.2.3.cmml">i</mi><mi id="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.3" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.3.cmml">t</mi></msubsup><mo id="S4.Ex1.m1.7.7.2.1.1.1.1.1.3" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.3.cmml">∣</mo><mrow id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.3.cmml"><mi class="ltx_font_mathcaligraphic" id="S4.Ex1.m1.3.3" xref="S4.Ex1.m1.3.3.cmml">𝒞</mi><mo id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.3" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.3.cmml">,</mo><mi id="S4.Ex1.m1.4.4" xref="S4.Ex1.m1.4.4.cmml">q</mi><mo id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.4" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.3.cmml">,</mo><msubsup id="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.cmml"><mi id="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.2.2" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.2.2.cmml">x</mi><mi id="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.2.3" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.2.3.cmml">i</mi><mn id="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.3" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.3.cmml">1</mn></msubsup><mo id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.5" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.3.cmml">,</mo><mi id="S4.Ex1.m1.5.5" mathvariant="normal" xref="S4.Ex1.m1.5.5.cmml">…</mi><mo id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.6" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.3.cmml">,</mo><msubsup id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.cmml"><mi id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.2.2" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.2.2.cmml">x</mi><mi id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.2.3" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.2.3.cmml">i</mi><mrow id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.3" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.3.cmml"><mi id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.3.2" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.3.2.cmml">t</mi><mo id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.3.1" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.3.1.cmml">−</mo><mn id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.3.3" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.3.3.cmml">1</mn></mrow></msubsup></mrow></mrow><mo id="S4.Ex1.m1.7.7.2.1.1.1.1.3" stretchy="false" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.cmml">)</mo></mrow></mrow><mo id="S4.Ex1.m1.7.7.2.1.2" xref="S4.Ex1.m1.7.7.2.1.2.cmml">/</mo><msub id="S4.Ex1.m1.7.7.2.1.3" xref="S4.Ex1.m1.7.7.2.1.3.cmml"><mi id="S4.Ex1.m1.7.7.2.1.3.2" xref="S4.Ex1.m1.7.7.2.1.3.2.cmml">T</mi><mi id="S4.Ex1.m1.7.7.2.1.3.3" xref="S4.Ex1.m1.7.7.2.1.3.3.cmml">i</mi></msub></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S4.Ex1.m1.7b"><apply id="S4.Ex1.m1.7.7.cmml" xref="S4.Ex1.m1.7.7"><eq id="S4.Ex1.m1.7.7.3.cmml" xref="S4.Ex1.m1.7.7.3"></eq><apply id="S4.Ex1.m1.6.6.1.cmml" xref="S4.Ex1.m1.6.6.1"><times id="S4.Ex1.m1.6.6.1.2.cmml" xref="S4.Ex1.m1.6.6.1.2"></times><apply id="S4.Ex1.m1.6.6.1.3.cmml" xref="S4.Ex1.m1.6.6.1.3"><log id="S4.Ex1.m1.6.6.1.3.1.cmml" xref="S4.Ex1.m1.6.6.1.3.1"></log><ci id="S4.Ex1.m1.6.6.1.3.2.cmml" xref="S4.Ex1.m1.6.6.1.3.2">𝑃</ci></apply><apply id="S4.Ex1.m1.6.6.1.1.1.1.cmml" xref="S4.Ex1.m1.6.6.1.1.1"><csymbol cd="latexml" id="S4.Ex1.m1.6.6.1.1.1.1.1.cmml" xref="S4.Ex1.m1.6.6.1.1.1.1.1">conditional</csymbol><apply id="S4.Ex1.m1.6.6.1.1.1.1.2.cmml" xref="S4.Ex1.m1.6.6.1.1.1.1.2"><csymbol cd="ambiguous" id="S4.Ex1.m1.6.6.1.1.1.1.2.1.cmml" xref="S4.Ex1.m1.6.6.1.1.1.1.2">subscript</csymbol><ci id="S4.Ex1.m1.6.6.1.1.1.1.2.2.cmml" xref="S4.Ex1.m1.6.6.1.1.1.1.2.2">𝑟</ci><ci id="S4.Ex1.m1.6.6.1.1.1.1.2.3.cmml" xref="S4.Ex1.m1.6.6.1.1.1.1.2.3">𝑖</ci></apply><list id="S4.Ex1.m1.6.6.1.1.1.1.3.1.cmml" xref="S4.Ex1.m1.6.6.1.1.1.1.3.2"><ci id="S4.Ex1.m1.1.1.cmml" xref="S4.Ex1.m1.1.1">𝒞</ci><ci id="S4.Ex1.m1.2.2.cmml" xref="S4.Ex1.m1.2.2">𝑞</ci></list></apply></apply><apply id="S4.Ex1.m1.7.7.2.cmml" xref="S4.Ex1.m1.7.7.2"><apply id="S4.Ex1.m1.7.7.2.2.cmml" xref="S4.Ex1.m1.7.7.2.2"><csymbol cd="ambiguous" id="S4.Ex1.m1.7.7.2.2.1.cmml" xref="S4.Ex1.m1.7.7.2.2">superscript</csymbol><apply id="S4.Ex1.m1.7.7.2.2.2.cmml" xref="S4.Ex1.m1.7.7.2.2"><csymbol cd="ambiguous" id="S4.Ex1.m1.7.7.2.2.2.1.cmml" xref="S4.Ex1.m1.7.7.2.2">subscript</csymbol><sum id="S4.Ex1.m1.7.7.2.2.2.2.cmml" xref="S4.Ex1.m1.7.7.2.2.2.2"></sum><apply id="S4.Ex1.m1.7.7.2.2.2.3.cmml" xref="S4.Ex1.m1.7.7.2.2.2.3"><eq id="S4.Ex1.m1.7.7.2.2.2.3.1.cmml" xref="S4.Ex1.m1.7.7.2.2.2.3.1"></eq><ci id="S4.Ex1.m1.7.7.2.2.2.3.2.cmml" xref="S4.Ex1.m1.7.7.2.2.2.3.2">𝑡</ci><cn id="S4.Ex1.m1.7.7.2.2.2.3.3.cmml" type="integer" xref="S4.Ex1.m1.7.7.2.2.2.3.3">1</cn></apply></apply><apply id="S4.Ex1.m1.7.7.2.2.3.cmml" xref="S4.Ex1.m1.7.7.2.2.3"><csymbol cd="ambiguous" id="S4.Ex1.m1.7.7.2.2.3.1.cmml" xref="S4.Ex1.m1.7.7.2.2.3">subscript</csymbol><ci id="S4.Ex1.m1.7.7.2.2.3.2.cmml" xref="S4.Ex1.m1.7.7.2.2.3.2">𝑇</ci><ci id="S4.Ex1.m1.7.7.2.2.3.3.cmml" xref="S4.Ex1.m1.7.7.2.2.3.3">𝑖</ci></apply></apply><apply id="S4.Ex1.m1.7.7.2.1.cmml" xref="S4.Ex1.m1.7.7.2.1"><divide id="S4.Ex1.m1.7.7.2.1.2.cmml" xref="S4.Ex1.m1.7.7.2.1.2"></divide><apply id="S4.Ex1.m1.7.7.2.1.1.cmml" xref="S4.Ex1.m1.7.7.2.1.1"><times id="S4.Ex1.m1.7.7.2.1.1.2.cmml" xref="S4.Ex1.m1.7.7.2.1.1.2"></times><apply id="S4.Ex1.m1.7.7.2.1.1.3.cmml" xref="S4.Ex1.m1.7.7.2.1.1.3"><log id="S4.Ex1.m1.7.7.2.1.1.3.1.cmml" xref="S4.Ex1.m1.7.7.2.1.1.3.1"></log><ci id="S4.Ex1.m1.7.7.2.1.1.3.2.cmml" xref="S4.Ex1.m1.7.7.2.1.1.3.2">𝑃</ci></apply><apply id="S4.Ex1.m1.7.7.2.1.1.1.1.1.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1"><csymbol cd="latexml" id="S4.Ex1.m1.7.7.2.1.1.1.1.1.3.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.3">conditional</csymbol><apply id="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.4"><csymbol cd="ambiguous" id="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.1.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.4">superscript</csymbol><apply id="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.2.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.4"><csymbol cd="ambiguous" id="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.2.1.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.4">subscript</csymbol><ci id="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.2.2.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.2.2">𝑥</ci><ci id="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.2.3.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.2.3">𝑖</ci></apply><ci id="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.3.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.4.3">𝑡</ci></apply><list id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.3.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2"><ci id="S4.Ex1.m1.3.3.cmml" xref="S4.Ex1.m1.3.3">𝒞</ci><ci id="S4.Ex1.m1.4.4.cmml" xref="S4.Ex1.m1.4.4">𝑞</ci><apply id="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1"><csymbol cd="ambiguous" id="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.1.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1">superscript</csymbol><apply id="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.2.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1"><csymbol cd="ambiguous" id="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.2.1.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1">subscript</csymbol><ci id="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.2.2.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.2.2">𝑥</ci><ci id="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.2.3.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.2.3">𝑖</ci></apply><cn id="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.3.cmml" type="integer" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.1.1.1.3">1</cn></apply><ci id="S4.Ex1.m1.5.5.cmml" xref="S4.Ex1.m1.5.5">…</ci><apply id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2"><csymbol cd="ambiguous" id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.1.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2">superscript</csymbol><apply id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.2.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2"><csymbol cd="ambiguous" id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.2.1.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2">subscript</csymbol><ci id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.2.2.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.2.2">𝑥</ci><ci id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.2.3.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.2.3">𝑖</ci></apply><apply id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.3.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.3"><minus id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.3.1.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.3.1"></minus><ci id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.3.2.cmml" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.3.2">𝑡</ci><cn id="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.3.3.cmml" type="integer" xref="S4.Ex1.m1.7.7.2.1.1.1.1.1.2.2.2.3.3">1</cn></apply></apply></list></apply></apply><apply id="S4.Ex1.m1.7.7.2.1.3.cmml" xref="S4.Ex1.m1.7.7.2.1.3"><csymbol cd="ambiguous" id="S4.Ex1.m1.7.7.2.1.3.1.cmml" xref="S4.Ex1.m1.7.7.2.1.3">subscript</csymbol><ci id="S4.Ex1.m1.7.7.2.1.3.2.cmml" xref="S4.Ex1.m1.7.7.2.1.3.2">𝑇</ci><ci id="S4.Ex1.m1.7.7.2.1.3.3.cmml" xref="S4.Ex1.m1.7.7.2.1.3.3">𝑖</ci></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.Ex1.m1.7c">\log P(r_{i}\mid\mathcal{C},q)=\sum_{t=1}^{T_{i}}\log P(x_{i}^{t}\mid\mathcal{%
+C},q,x_{i}^{1},\dots,x_{i}^{t-1})/T_{i}</annotation><annotation encoding="application/x-llamapun" id="S4.Ex1.m1.7d">roman_log italic_P ( italic_r start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT ∣ caligraphic_C , italic_q ) = ∑ start_POSTSUBSCRIPT italic_t = 1 end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_T start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT end_POSTSUPERSCRIPT roman_log italic_P ( italic_x start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_t end_POSTSUPERSCRIPT ∣ caligraphic_C , italic_q , italic_x start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT 1 end_POSTSUPERSCRIPT , … , italic_x start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_t - 1 end_POSTSUPERSCRIPT ) / italic_T start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div class="ltx_para ltx_noindent" id="S4.SS5.SSS0.Px1.p2">
+<p class="ltx_p" id="S4.SS5.SSS0.Px1.p2.1">As the method requires logarithmic probability of output tokens over the entire vocabulary, which is often not available in proprietary models, we evaluate open-weight models—LLaMA-3.1–70B, LLaMA-3.1–8B, and DeepSeek-Distill-LLaMA–8B. Due to constraints in computation resources, we only evaluate the models on the 10-session version of the benchmark, which includes around 32<math alttext="k" class="ltx_Math" display="inline" id="S4.SS5.SSS0.Px1.p2.1.m1.1"><semantics id="S4.SS5.SSS0.Px1.p2.1.m1.1a"><mi id="S4.SS5.SSS0.Px1.p2.1.m1.1.1" xref="S4.SS5.SSS0.Px1.p2.1.m1.1.1.cmml">k</mi><annotation-xml encoding="MathML-Content" id="S4.SS5.SSS0.Px1.p2.1.m1.1b"><ci id="S4.SS5.SSS0.Px1.p2.1.m1.1.1.cmml" xref="S4.SS5.SSS0.Px1.p2.1.m1.1.1">𝑘</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS5.SSS0.Px1.p2.1.m1.1c">k</annotation><annotation encoding="application/x-llamapun" id="S4.SS5.SSS0.Px1.p2.1.m1.1d">italic_k</annotation></semantics></math>-tokens per session.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S4.SS5.SSS0.Px2">
+<h4 class="ltx_title ltx_title_paragraph">Results.</h4>
+<div class="ltx_para" id="S4.SS5.SSS0.Px2.p1">
+<p class="ltx_p" id="S4.SS5.SSS0.Px2.p1.1">As shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.F6" title="Figure 6 ‣ Results. ‣ 4.5 Evaluation of Language Models in Generative Settings ‣ 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">6</span></a>, we observe the similar trend to our <em class="ltx_emph ltx_font_italic" id="S4.SS5.SSS0.Px2.p1.1.1">discriminative</em> evaluation results in terms of difficulty by different user query types. Models get reasonably good performance on recalling facts and tracking preference changes, while giving new suggestions and generalizing to new scenarios are still the most challenging types of queries for models. Interestingly, when comparing the same model, specifically LLama-3.1-8B-instruct, under discriminative and generative settings, we see the performance is better in the generative setting, potentially suggesting that the model is able to provide a personalized response without seeing all the candidate options in the input. Since we only managed to run evaluation on 32k context length with the generative setting, it remains to be investigated whether results in <span class="ltx_text ltx_font_italic" id="S4.SS5.SSS0.Px2.p1.1.2">generative</span> vs. <span class="ltx_text ltx_font_italic" id="S4.SS5.SSS0.Px2.p1.1.3">discriminative</span> settings stand for longer context length and for different models. We also find that model performance declines as users’ new requests become more distant from their previously revealed information. Detailed results are provided in Appendix <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#A2" title="Appendix B Supplementary Experiment Results ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">B</span></a>.</p>
+</div>
+<figure class="ltx_figure" id="S4.F6"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="244" id="S4.F6.g1" src="x6.png" width="440"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 6: </span>Generative evaluation on 10-session (32k token length) version of <span class="ltx_text ltx_font_smallcaps" id="S4.F6.2.1">PersonaMem</span>.</figcaption>
+</figure>
+</section>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Related Work</h2>
+<section class="ltx_subsection" id="S5.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.1 </span>Evaluating Long-Context Memory Capabilities of LLMs</h3>
+<div class="ltx_para ltx_noindent" id="S5.SS1.p1">
+<p class="ltx_p" id="S5.SS1.p1.1">Needle-in-the-haystack tests, which task models to locate specific facts within a given long context, are a common method for this evaluation. Prior benchmarks perform tasks from direct information retrieval <cite class="ltx_cite ltx_citemacro_citep">(Kuratov et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib22" title="">2024</a>; Nelson et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib30" title="">2024</a>)</cite> to question answering and summarization <cite class="ltx_cite ltx_citemacro_citep">(Xu et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib52" title="">2024</a>; Bai et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib5" title="">2024</a>; Zhang et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib55" title="">2024</a>)</cite>.
+A more real-world setting for such evaluation is through dialogue conversations. Earlier benchmarks curated human-human <cite class="ltx_cite ltx_citemacro_citep">(Xu, <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib51" title="">2021</a>)</cite> or human-AI interactions <cite class="ltx_cite ltx_citemacro_cite">Xu et al. (<a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib53" title="">2022</a>)</cite>, with sessions up to 10K tokens. More recent works have used LLMs to generate much longer sessions of 100k+ tokens long <cite class="ltx_cite ltx_citemacro_citep">(Maharana et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib27" title="">2024</a>; Kim et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib19" title="">2024</a>; Castillo-Bolado et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib6" title="">2024</a>)</cite>.
+More recently, <cite class="ltx_cite ltx_citemacro_cite">Wu et al. (<a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib48" title="">2024</a>)</cite> present <span class="ltx_text ltx_font_smallcaps" id="S5.SS1.p1.1.1">LongMemEval</span>, a dialogue benchmark which also considers contexts up to 1M, and uses persona-driven sessions. The major differences are that sessions from <span class="ltx_text ltx_font_smallcaps" id="S5.SS1.p1.1.2">PersonaMem</span> consider a broader range of topics than just task-oriented ones; and that the evaluation of <span class="ltx_text ltx_font_smallcaps" id="S5.SS1.p1.1.3">PersonaMem</span> focuses on fine-grained personalization concerns, rather than more general memory abilities.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S5.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.2 </span>Towards Personalization in Large Language Models</h3>
+<div class="ltx_para ltx_noindent" id="S5.SS2.p1">
+<p class="ltx_p" id="S5.SS2.p1.1">As users have a diversity of preferences, both at a demographic-level <cite class="ltx_cite ltx_citemacro_citep">(Santurkar et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib39" title="">2023</a>)</cite> and at an individual-level <cite class="ltx_cite ltx_citemacro_citep">(Zollo et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib59" title="">2024</a>)</cite>. <span class="ltx_text ltx_font_italic" id="S5.SS2.p1.1.1">Personas</span> are short biographies of individuals, that capture both levels, and can be generated en masse by LLMs <cite class="ltx_cite ltx_citemacro_citep">(Ge et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib11" title="">2024</a>)</cite>. Researchers have used personas to evaluate how LLMs can adapt to users and environments <cite class="ltx_cite ltx_citemacro_citep">(Castricato et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib7" title="">2024</a>; Tseng et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib46" title="">2024</a>)</cite>.
+Reliable evaluation of personalization is also key. Many of the aforementioned benchmarks through formulation as NLP tasks, and another line of work uses LLMs to automatically judge texts along different axes of personalization <cite class="ltx_cite ltx_citemacro_citep">(Dong et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib10" title="">2024</a>; Wang et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib47" title="">2023</a>)</cite>. The approach taken by <span class="ltx_text ltx_font_smallcaps" id="S5.SS2.p1.1.2">PersonaMem</span> follows the former, as we report performance on question-answering. Importantly though, the personalization evaluation is by design of the questions and answers, each of which is grounded in specific temporal events, and is generated to adhere to a specific question type.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S5.SS2.p2">
+<p class="ltx_p" id="S5.SS2.p2.1">Turning to the dialogue setting, earlier works like <span class="ltx_text ltx_font_smallcaps" id="S5.SS2.p2.1.1">LaMP</span> and <span class="ltx_text ltx_font_smallcaps" id="S5.SS2.p2.1.2">PersonaLLM</span> consider personalization within a single turn or session <cite class="ltx_cite ltx_citemacro_citep">(Salemi et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib38" title="">2023</a>; Jiang et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib18" title="">2023</a>; Kirk et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib20" title="">2024</a>)</cite>. More recently, <span class="ltx_text ltx_font_smallcaps" id="S5.SS2.p2.1.3">ImplexConv</span> <cite class="ltx_cite ltx_citemacro_citep">(Li et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib24" title="">2025</a>)</cite> focuses on modeling implicit reasoning within personalized conversations. <span class="ltx_text ltx_font_smallcaps" id="S5.SS2.p2.1.4">PersonaBench</span> <cite class="ltx_cite ltx_citemacro_citep">(Tan et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib43" title="">2025</a>)</cite> simulates social interactions among diverse users through numerous but shorter sessions and access to synthetic private user data. <span class="ltx_text ltx_font_smallcaps" id="S5.SS2.p2.1.5">PersoBench</span> <cite class="ltx_cite ltx_citemacro_citep">(Afzoon et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib1" title="">2024</a>)</cite> leverages existing persona-aware datasets to evaluate language quality, persona coverage, and consistency. <span class="ltx_text ltx_font_smallcaps" id="S5.SS2.p2.1.6">LongLaMP</span> <cite class="ltx_cite ltx_citemacro_citep">(Kumar et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib21" title="">2024</a>)</cite> focuses on generating long-form texts other than more interactive responses within long context. <cite class="ltx_cite ltx_citemacro_cite">Zhao et al. (<a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib56" title="">2025</a>)</cite> introduce <span class="ltx_text ltx_font_smallcaps" id="S5.SS2.p2.1.7">PrefEval</span>, which evaluates LLMs’ preference-following abilities for 20 topics in persona-oriented dialogues of 100k+ tokens. <span class="ltx_text ltx_font_smallcaps" id="S5.SS2.p2.1.8">PersonaMem</span>, besides the flexible setting of generating numerous 1<math alttext="M" class="ltx_Math" display="inline" id="S5.SS2.p2.1.m1.1"><semantics id="S5.SS2.p2.1.m1.1a"><mi id="S5.SS2.p2.1.m1.1.1" xref="S5.SS2.p2.1.m1.1.1.cmml">M</mi><annotation-xml encoding="MathML-Content" id="S5.SS2.p2.1.m1.1b"><ci id="S5.SS2.p2.1.m1.1.1.cmml" xref="S5.SS2.p2.1.m1.1.1">𝑀</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.SS2.p2.1.m1.1c">M</annotation><annotation encoding="application/x-llamapun" id="S5.SS2.p2.1.m1.1d">italic_M</annotation></semantics></math>-token contexts efficiently, places greater emphasis on personas as simulated humans in user-model interactions, featuring multiple fine-grained personalization tasks where profiles and preferences evolve through temporally grounded events.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6 </span>Conclusion</h2>
+<div class="ltx_para ltx_noindent" id="S6.p1">
+<p class="ltx_p" id="S6.p1.1">In this paper, we introduce the <img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="14" id="S6.p1.1.g1" src="extracted/6370758/figures/silhouette-emoji.png" width="13"/> <span class="ltx_text ltx_font_smallcaps" id="S6.p1.1.1">PersonaMem</span> benchmark, featuring scalable and persona-oriented multi-session user-LLM interaction histories, as well as fine-grained <em class="ltx_emph ltx_font_italic" id="S6.p1.1.2">in-situ</em> user query types designed to evaluate LLM capabilities in memorizing, tracking, and incorporating users’ dynamic profiles into personalized responses. Through comprehensive assessments of 15 state-of-the-art LLM models and retrieval-based methods, we highlight current challenges in enabling LLMs to deliver truly personalized conversations with users, especially in novel scenarios and long contexts. We hope that our benchmark opens new avenues for future exploration and advancement in personalized LLM chatbot development.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Afzoon et al. (2024)</span>
+<span class="ltx_bibblock">
+Saleh Afzoon, Usman Naseem, Amin Beheshti, and Zahra Jamali.
+
+</span>
+<span class="ltx_bibblock">Persobench: Benchmarking personalized response generation in large language models.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib1.1.1">arXiv preprint arXiv:2410.03198</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Aggarwal et al. (2023)</span>
+<span class="ltx_bibblock">
+Abhishek Aggarwal, Cheuk Chi Tam, Dezhi Wu, Xiaoming Li, and Shan Qiao.
+
+</span>
+<span class="ltx_bibblock">Artificial intelligence–based chatbots for promoting health behavioral changes: systematic review.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib2.1.1">Journal of medical Internet research</em>, 25:e40789, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ait Baha et al. (2023)</span>
+<span class="ltx_bibblock">
+Tarek Ait Baha, Mohamed El Hajji, Youssef Es-Saady, and Hammou Fadili.
+
+</span>
+<span class="ltx_bibblock">The power of personalization: A systematic review of personality-adaptive chatbots.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib3.1.1">SN Computer Science</em>, 4(5):661, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Anthropic (2024)</span>
+<span class="ltx_bibblock">
+Anthropic.
+
+</span>
+<span class="ltx_bibblock">The claude 3 model family: Opus, sonnet, haiku.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_url ltx_font_typewriter" href="https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model_Card_Claude_3.pdf" title="">https://www-cdn.anthropic.com/de8ba9b01c9ab7cbabf5c33b80b7bbc618857627/Model_Card_Claude_3.pdf</a>, March 2024.
+
+</span>
+<span class="ltx_bibblock">Accessed: 2025-04-10.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Bai et al. (2024)</span>
+<span class="ltx_bibblock">
+Yushi Bai, Xin Lv, Jiajie Zhang, Hongchang Lyu, Jiankai Tang, Zhidian Huang, Zhengxiao Du, Xiao Liu, Aohan Zeng, Lei Hou, Yuxiao Dong, Jie Tang, and Juanzi Li.
+
+</span>
+<span class="ltx_bibblock">LongBench: A bilingual, multitask benchmark for long context understanding.
+
+</span>
+<span class="ltx_bibblock">In Lun-Wei Ku, Andre Martins, and Vivek Srikumar (eds.), <em class="ltx_emph ltx_font_italic" id="bib.bib5.1.1">Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)</em>, pp.  3119–3137, Bangkok, Thailand, August 2024. Association for Computational Linguistics.
+
+</span>
+<span class="ltx_bibblock">doi: <span class="ltx_ref ltx_nolink ltx_Url ltx_ref_self">10.18653/v1/2024.acl-long.172</span>.
+
+</span>
+<span class="ltx_bibblock">URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://aclanthology.org/2024.acl-long.172/" title="">https://aclanthology.org/2024.acl-long.172/</a>.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Castillo-Bolado et al. (2024)</span>
+<span class="ltx_bibblock">
+David Castillo-Bolado, Joseph Davidson, Finlay Gray, and Marek Rosa.
+
+</span>
+<span class="ltx_bibblock">Beyond prompts: Dynamic conversational benchmarking of large language models.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib6.1.1">arXiv preprint arXiv:2409.20222</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Castricato et al. (2024)</span>
+<span class="ltx_bibblock">
+Louis Castricato, Nathan Lile, Rafael Rafailov, Jan-Philipp Fränken, and Chelsea Finn.
+
+</span>
+<span class="ltx_bibblock">Persona: A reproducible testbed for pluralistic alignment.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib7.1.1">arXiv preprint arXiv:2407.17387</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Chen et al. (2024)</span>
+<span class="ltx_bibblock">
+Jianlv Chen, Shitao Xiao, Peitian Zhang, Kun Luo, Defu Lian, and Zheng Liu.
+
+</span>
+<span class="ltx_bibblock">Bge m3-embedding: Multi-lingual, multi-functionality, multi-granularity text embeddings through self-knowledge distillation.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib8.1.1">arXiv preprint arXiv:2402.03216</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Dean &amp; Morgenstern (2022)</span>
+<span class="ltx_bibblock">
+Sarah Dean and Jamie Morgenstern.
+
+</span>
+<span class="ltx_bibblock">Preference dynamics under personalized recommendations.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib9.1.1">Proceedings of the 23rd ACM Conference on Economics and Computation</em>, pp.  795–816, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Dong et al. (2024)</span>
+<span class="ltx_bibblock">
+Yijiang River Dong, Tiancheng Hu, and Nigel Collier.
+
+</span>
+<span class="ltx_bibblock">Can llm be a personalized judge?
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib10.1.1">arXiv preprint arXiv:2406.11657</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ge et al. (2024)</span>
+<span class="ltx_bibblock">
+Tao Ge, Xin Chan, Xiaoyang Wang, Dian Yu, Haitao Mi, and Dong Yu.
+
+</span>
+<span class="ltx_bibblock">Scaling synthetic data creation with 1,000,000,000 personas.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib11.1.1">arXiv preprint arXiv:2406.20094</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Grattafiori et al. (2024)</span>
+<span class="ltx_bibblock">
+Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad Al-Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten, Alex Vaughan, et al.
+
+</span>
+<span class="ltx_bibblock">The llama 3 herd of models.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib12.1.1">arXiv preprint arXiv:2407.21783</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Guo et al. (2025)</span>
+<span class="ltx_bibblock">
+Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song, Ruoyu Zhang, Runxin Xu, Qihao Zhu, Shirong Ma, Peiyi Wang, Xiao Bi, et al.
+
+</span>
+<span class="ltx_bibblock">Deepseek-r1: Incentivizing reasoning capability in llms via reinforcement learning.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib13.1.1">arXiv preprint arXiv:2501.12948</em>, 2025.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Gwet (2008)</span>
+<span class="ltx_bibblock">
+Kilem Li Gwet.
+
+</span>
+<span class="ltx_bibblock">Computing inter-rater reliability and its variance in the presence of high agreement.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib14.1.1">British Journal of Mathematical and Statistical Psychology</em>, 61(1):29–48, 2008.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Hua et al. (2023)</span>
+<span class="ltx_bibblock">
+Wenyue Hua, Lei Li, Shuyuan Xu, Li Chen, and Yongfeng Zhang.
+
+</span>
+<span class="ltx_bibblock">Tutorial on large language models for recommendation.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib15.1.1">Proceedings of the 17th ACM Conference on Recommender Systems</em>, pp.  1281–1283, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Hurst et al. (2024)</span>
+<span class="ltx_bibblock">
+Aaron Hurst, Adam Lerer, Adam P Goucher, Adam Perelman, Aditya Ramesh, Aidan Clark, AJ Ostrow, Akila Welihinda, Alan Hayes, Alec Radford, et al.
+
+</span>
+<span class="ltx_bibblock">Gpt-4o system card.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib16.1.1">arXiv preprint arXiv:2410.21276</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Jiang et al. (2024)</span>
+<span class="ltx_bibblock">
+Bowen Jiang, Yangxinyu Xie, Zhuoqun Hao, Xiaomeng Wang, Tanwi Mallick, Weijie J Su, Camillo J Taylor, and Dan Roth.
+
+</span>
+<span class="ltx_bibblock">A peek into token bias: Large language models are not yet genuine reasoners.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib17.1.1">arXiv preprint arXiv:2406.11050</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Jiang et al. (2023)</span>
+<span class="ltx_bibblock">
+Hang Jiang, Xiajie Zhang, Xubo Cao, Cynthia Breazeal, Deb Roy, and Jad Kabbara.
+
+</span>
+<span class="ltx_bibblock">Personallm: Investigating the ability of large language models to express personality traits.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib18.1.1">arXiv preprint arXiv:2305.02547</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kim et al. (2024)</span>
+<span class="ltx_bibblock">
+Jiho Kim, Woosog Chay, Hyeonji Hwang, Daeun Kyung, Hyunseung Chung, Eunbyeol Cho, Yohan Jo, and Edward Choi.
+
+</span>
+<span class="ltx_bibblock">Dialsim: A real-time simulator for evaluating long-term dialogue understanding of conversational agents.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib19.1.1">arXiv preprint arXiv:2406.13144</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kirk et al. (2024)</span>
+<span class="ltx_bibblock">
+Hannah Rose Kirk, Alexander Whitefield, Paul Röttger, Andrew Bean, Katerina Margatina, Juan Ciro, Rafael Mosquera, Max Bartolo, Adina Williams, He He, et al.
+
+</span>
+<span class="ltx_bibblock">The prism alignment project: What participatory, representative and individualised human feedback reveals about the subjective and multicultural alignment of large language models.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib20.1.1">arXiv preprint arXiv:2404.16019</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kumar et al. (2024)</span>
+<span class="ltx_bibblock">
+Ishita Kumar, Snigdha Viswanathan, Sushrita Yerra, Alireza Salemi, Ryan A Rossi, Franck Dernoncourt, Hanieh Deilamsalehy, Xiang Chen, Ruiyi Zhang, Shubham Agarwal, et al.
+
+</span>
+<span class="ltx_bibblock">Longlamp: A benchmark for personalized long-form text generation.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib21.1.1">arXiv preprint arXiv:2407.11016</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kuratov et al. (2024)</span>
+<span class="ltx_bibblock">
+Yuri Kuratov, Aydar Bulatov, Petr Anokhin, Dmitry Sorokin, Artyom Sorokin, and Mikhail Burtsev.
+
+</span>
+<span class="ltx_bibblock">In search of needles in a 10m haystack: Recurrent memory finds what llms miss.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib22.1.1">arXiv preprint arXiv:2402.10790</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Lewis et al. (2020)</span>
+<span class="ltx_bibblock">
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel, et al.
+
+</span>
+<span class="ltx_bibblock">Retrieval-augmented generation for knowledge-intensive nlp tasks.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib23.1.1">Advances in neural information processing systems</em>, 33:9459–9474, 2020.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Li et al. (2025)</span>
+<span class="ltx_bibblock">
+Xintong Li, Jalend Bantupalli, Ria Dharmani, Yuwei Zhang, and Jingbo Shang.
+
+</span>
+<span class="ltx_bibblock">Toward multi-session personalized conversation: A large-scale dataset and hierarchical tree framework for implicit reasoning.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib24.1.1">arXiv preprint arXiv:2503.07018</em>, 2025.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Lin et al. (2024)</span>
+<span class="ltx_bibblock">
+Ying-Chun Lin, Jennifer Neville, Jack Stokes, Longqi Yang, Tara Safavi, Mengting Wan, Scott Counts, Siddharth Suri, Reid Andersen, Xiaofeng Xu, Deepak Gupta, Sujay Kumar Jauhar, Xia Song, Georg Buscher, Saurabh Tiwary, Brent Hecht, and Jaime Teevan.
+
+</span>
+<span class="ltx_bibblock">Interpretable user satisfaction estimation for conversational systems with large language models.
+
+</span>
+<span class="ltx_bibblock">In Lun-Wei Ku, Andre Martins, and Vivek Srikumar (eds.), <em class="ltx_emph ltx_font_italic" id="bib.bib25.1.1">Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)</em>, pp.  11100–11115, Bangkok, Thailand, August 2024. Association for Computational Linguistics.
+
+</span>
+<span class="ltx_bibblock">doi: <span class="ltx_ref ltx_nolink ltx_Url ltx_ref_self">10.18653/v1/2024.acl-long.598</span>.
+
+</span>
+<span class="ltx_bibblock">URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://aclanthology.org/2024.acl-long.598/" title="">https://aclanthology.org/2024.acl-long.598/</a>.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Liu et al. (2024)</span>
+<span class="ltx_bibblock">
+Nelson F Liu, Kevin Lin, John Hewitt, Ashwin Paranjape, Michele Bevilacqua, Fabio Petroni, and Percy Liang.
+
+</span>
+<span class="ltx_bibblock">Lost in the middle: How language models use long contexts.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib26.1.1">Transactions of the Association for Computational Linguistics</em>, 12:157–173, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Maharana et al. (2024)</span>
+<span class="ltx_bibblock">
+Adyasha Maharana, Dong-Ho Lee, Sergey Tulyakov, Mohit Bansal, Francesco Barbieri, and Yuwei Fang.
+
+</span>
+<span class="ltx_bibblock">Evaluating very long-term conversational memory of llm agents.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib27.1.1">arXiv preprint arXiv:2402.17753</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Mem0 (2024)</span>
+<span class="ltx_bibblock">
+Mem0.
+
+</span>
+<span class="ltx_bibblock">Mem0: An additional memory layer for language models.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_url ltx_font_typewriter" href="https://mem0.ai" title="">https://mem0.ai</a>, 2024.
+
+</span>
+<span class="ltx_bibblock">Accessed: 2025-03-27.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Mysore et al. (2024)</span>
+<span class="ltx_bibblock">
+Sheshera Mysore, Zhuoran Lu, Mengting Wan, Longqi Yang, Bahareh Sarrafzadeh, Steve Menezes, Tina Baghaee, Emmanuel Barajas Gonzalez, Jennifer Neville, and Tara Safavi.
+
+</span>
+<span class="ltx_bibblock">Pearl: Personalizing large language model writing assistants with generation-calibrated retrievers.
+
+</span>
+<span class="ltx_bibblock">In Sachin Kumar, Vidhisha Balachandran, Chan Young Park, Weijia Shi, Shirley Anugrah Hayati, Yulia Tsvetkov, Noah Smith, Hannaneh Hajishirzi, Dongyeop Kang, and David Jurgens (eds.), <em class="ltx_emph ltx_font_italic" id="bib.bib29.1.1">Proceedings of the 1st Workshop on Customizable NLP: Progress and Challenges in Customizing NLP for a Domain, Application, Group, or Individual (CustomNLP4U)</em>, pp.  198–219, Miami, Florida, USA, November 2024. Association for Computational Linguistics.
+
+</span>
+<span class="ltx_bibblock">doi: <span class="ltx_ref ltx_nolink ltx_Url ltx_ref_self">10.18653/v1/2024.customnlp4u-1.16</span>.
+
+</span>
+<span class="ltx_bibblock">URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://aclanthology.org/2024.customnlp4u-1.16/" title="">https://aclanthology.org/2024.customnlp4u-1.16/</a>.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Nelson et al. (2024)</span>
+<span class="ltx_bibblock">
+Elliot Nelson, Georgios Kollias, Payel Das, Subhajit Chaudhury, and Soham Dan.
+
+</span>
+<span class="ltx_bibblock">Needle in the haystack for memory based large language models.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib30.1.1">arXiv preprint arXiv:2407.01437</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">OpenAI (2024a)</span>
+<span class="ltx_bibblock">
+OpenAI.
+
+</span>
+<span class="ltx_bibblock">Openai o1 system card, 2024a.
+
+</span>
+<span class="ltx_bibblock">URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://cdn.openai.com/o1-system-card-20241205.pdf" title="">https://cdn.openai.com/o1-system-card-20241205.pdf</a>.
+
+</span>
+<span class="ltx_bibblock">Accessed: 2025-03-27.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">OpenAI (2024b)</span>
+<span class="ltx_bibblock">
+OpenAI.
+
+</span>
+<span class="ltx_bibblock">Openai o3 and o4-mini system card, 2024b.
+
+</span>
+<span class="ltx_bibblock">URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://openai.com/index/o3-o4-mini-system-card/" title="">https://openai.com/index/o3-o4-mini-system-card/</a>.
+
+</span>
+<span class="ltx_bibblock">Accessed: 2025-04-18.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">OpenAI (2025a)</span>
+<span class="ltx_bibblock">
+OpenAI.
+
+</span>
+<span class="ltx_bibblock">Openai gpt-4.5 system card, 2025a.
+
+</span>
+<span class="ltx_bibblock">URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://cdn.openai.com/gpt-4-5-system-card-2272025.pdf" title="">https://cdn.openai.com/gpt-4-5-system-card-2272025.pdf</a>.
+
+</span>
+<span class="ltx_bibblock">Accessed: 2025-03-27.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib34">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">OpenAI (2025b)</span>
+<span class="ltx_bibblock">
+OpenAI.
+
+</span>
+<span class="ltx_bibblock">Openai o3-mini system card, 2025b.
+
+</span>
+<span class="ltx_bibblock">URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://cdn.openai.com/o3-mini-system-card-feb10.pdf" title="">https://cdn.openai.com/o3-mini-system-card-feb10.pdf</a>.
+
+</span>
+<span class="ltx_bibblock">Accessed: 2025-03-27.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib35">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Pei et al. (2022)</span>
+<span class="ltx_bibblock">
+Jiaxin Pei, Aparna Ananthasubramaniam, Xingyao Wang, Naitian Zhou, Apostolos Dedeloudis, Jackson Sargent, and David Jurgens.
+
+</span>
+<span class="ltx_bibblock">Potato: The portable text annotation tool.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib35.1.1">Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing: System Demonstrations</em>, pp.  327–337, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib36">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Radlinski &amp; Craswell (2017)</span>
+<span class="ltx_bibblock">
+Filip Radlinski and Nick Craswell.
+
+</span>
+<span class="ltx_bibblock">A theoretical framework for conversational search.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib36.1.1">Proceedings of the 2017 conference on conference human information interaction and retrieval</em>, pp.  117–126, 2017.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib37">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Rein et al. (2024)</span>
+<span class="ltx_bibblock">
+David Rein, Betty Li Hou, Asa Cooper Stickland, Jackson Petty, Richard Yuanzhe Pang, Julien Dirani, Julian Michael, and Samuel R Bowman.
+
+</span>
+<span class="ltx_bibblock">Gpqa: A graduate-level google-proof q&amp;a benchmark.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib37.1.1">First Conference on Language Modeling</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib38">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Salemi et al. (2023)</span>
+<span class="ltx_bibblock">
+Alireza Salemi, Sheshera Mysore, Michael Bendersky, and Hamed Zamani.
+
+</span>
+<span class="ltx_bibblock">Lamp: When large language models meet personalization.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib38.1.1">arXiv preprint arXiv:2304.11406</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib39">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Santurkar et al. (2023)</span>
+<span class="ltx_bibblock">
+Shibani Santurkar, Esin Durmus, Faisal Ladhak, Cinoo Lee, Percy Liang, and Tatsunori Hashimoto.
+
+</span>
+<span class="ltx_bibblock">Whose opinions do language models reflect?
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib39.1.1">International Conference on Machine Learning</em>, pp.  29971–30004. PMLR, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib40">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Shi et al. (2024)</span>
+<span class="ltx_bibblock">
+Taiwei Shi, Zhuoer Wang, Longqi Yang, Ying-Chun Lin, Zexue He, Mengting Wan, Pei Zhou, Sujay Jauhar, Sihao Chen, Shan Xia, et al.
+
+</span>
+<span class="ltx_bibblock">Wildfeedback: Aligning llms with in-situ user interactions and feedback.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib40.1.1">arXiv preprint arXiv:2408.15549</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib41">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Sorensen et al. (2024)</span>
+<span class="ltx_bibblock">
+Taylor Sorensen, Jared Moore, Jillian Fisher, Mitchell Gordon, Niloofar Mireshghallah, Christopher Michael Rytting, Andre Ye, Liwei Jiang, Ximing Lu, Nouha Dziri, et al.
+
+</span>
+<span class="ltx_bibblock">Position: a roadmap to pluralistic alignment.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib41.1.1">Proceedings of the 41st International Conference on Machine Learning</em>, pp.  46280–46302, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib42">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Srivastava et al. (2023)</span>
+<span class="ltx_bibblock">
+Aarohi Srivastava, Abhinav Rastogi, Abhishek Rao, Abu Awal Md Shoeb, Abubakar Abid, Adam Fisch, Adam R Brown, Adam Santoro, Aditya Gupta, Adrià Garriga-Alonso, et al.
+
+</span>
+<span class="ltx_bibblock">Beyond the imitation game: quantifying and extrapolating the capabilities of language models.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib42.1.1">Transactions on Machine Learning Research</em>, 2023(5):1–95, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib43">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Tan et al. (2025)</span>
+<span class="ltx_bibblock">
+Juntao Tan, Liangwei Yang, Zuxin Liu, Zhiwei Liu, Rithesh Murthy, Tulika Manoj Awalgaonkar, Jianguo Zhang, Weiran Yao, Ming Zhu, Shirley Kokane, et al.
+
+</span>
+<span class="ltx_bibblock">Personabench: Evaluating ai models on understanding personal information through accessing (synthetic) private user data.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib43.1.1">arXiv preprint arXiv:2502.20616</em>, 2025.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib44">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Team et al. (2024)</span>
+<span class="ltx_bibblock">
+Gemini Team, Petko Georgiev, Ving Ian Lei, Ryan Burnell, Libin Bai, Anmol Gulati, Garrett Tanzer, Damien Vincent, Zhufeng Pan, Shibo Wang, et al.
+
+</span>
+<span class="ltx_bibblock">Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib44.1.1">arXiv preprint arXiv:2403.05530</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib45">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Tian et al. (2024)</span>
+<span class="ltx_bibblock">
+Yufei Tian, Tenghao Huang, Miri Liu, Derek Jiang, Alexander Spangher, Muhao Chen, Jonathan May, and Nanyun Peng.
+
+</span>
+<span class="ltx_bibblock">Are large language models capable of generating human-level narratives?
+
+</span>
+<span class="ltx_bibblock">In Yaser Al-Onaizan, Mohit Bansal, and Yun-Nung Chen (eds.), <em class="ltx_emph ltx_font_italic" id="bib.bib45.1.1">Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing</em>, pp.  17659–17681, Miami, Florida, USA, November 2024. Association for Computational Linguistics.
+
+</span>
+<span class="ltx_bibblock">doi: <span class="ltx_ref ltx_nolink ltx_Url ltx_ref_self">10.18653/v1/2024.emnlp-main.978</span>.
+
+</span>
+<span class="ltx_bibblock">URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://aclanthology.org/2024.emnlp-main.978/" title="">https://aclanthology.org/2024.emnlp-main.978/</a>.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib46">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Tseng et al. (2024)</span>
+<span class="ltx_bibblock">
+Yu-Min Tseng, Yu-Chao Huang, Teng-Yun Hsiao, Yu-Ching Hsu, Jia-Yin Foo, Chao-Wei Huang, and Yun-Nung Chen.
+
+</span>
+<span class="ltx_bibblock">Two tales of persona in llms: A survey of role-playing and personalization.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib46.1.1">arXiv preprint arXiv:2406.01171</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib47">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wang et al. (2023)</span>
+<span class="ltx_bibblock">
+Yaqing Wang, Jiepu Jiang, Mingyang Zhang, Cheng Li, Yi Liang, Qiaozhu Mei, and Michael Bendersky.
+
+</span>
+<span class="ltx_bibblock">Automated evaluation of personalized text generation using large language models.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib47.1.1">arXiv preprint arXiv:2310.11593</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib48">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wu et al. (2024)</span>
+<span class="ltx_bibblock">
+Di Wu, Hongwei Wang, Wenhao Yu, Yuwei Zhang, Kai-Wei Chang, and Dong Yu.
+
+</span>
+<span class="ltx_bibblock">Longmemeval: Benchmarking chat assistants on long-term interactive memory.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib48.1.1">arXiv preprint arXiv:2410.10813</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib49">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Xie et al. (2024a)</span>
+<span class="ltx_bibblock">
+Jian Xie, Kai Zhang, Jiangjie Chen, Tinghui Zhu, Renze Lou, Yuandong Tian, Yanghua Xiao, and Yu Su.
+
+</span>
+<span class="ltx_bibblock">Travelplanner: a benchmark for real-world planning with language agents.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib49.1.1">Proceedings of the 41st International Conference on Machine Learning</em>, pp.  54590–54613, 2024a.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib50">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Xie et al. (2024b)</span>
+<span class="ltx_bibblock">
+Yangxinyu Xie, Bowen Jiang, Tanwi Mallick, Joshua David Bergerson, John K Hutchison, Duane R Verner, Jordan Branham, M Ross Alexander, Robert B Ross, Yan Feng, et al.
+
+</span>
+<span class="ltx_bibblock">Wildfiregpt: Tailored large language model for wildfire analysis.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib50.1.1">arXiv preprint arXiv:2402.07877</em>, 2024b.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib51">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Xu (2021)</span>
+<span class="ltx_bibblock">
+J Xu.
+
+</span>
+<span class="ltx_bibblock">Beyond goldfish memory: Long-term open-domain conversation.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib51.1.1">arXiv preprint arXiv:2107.07567</em>, 2021.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib52">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Xu et al. (2024)</span>
+<span class="ltx_bibblock">
+Xiaoyue Xu, Qinyuan Ye, and Xiang Ren.
+
+</span>
+<span class="ltx_bibblock">Stress-testing long-context language models with lifelong icl and task haystack.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib52.1.1">arXiv preprint arXiv:2407.16695</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib53">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Xu et al. (2022)</span>
+<span class="ltx_bibblock">
+Xinchao Xu, Zhibin Gou, Wenquan Wu, Zheng-Yu Niu, Hua Wu, Haifeng Wang, and Shihang Wang.
+
+</span>
+<span class="ltx_bibblock">Long time no see! open-domain conversation with long-term persona memory.
+
+</span>
+<span class="ltx_bibblock">In Smaranda Muresan, Preslav Nakov, and Aline Villavicencio (eds.), <em class="ltx_emph ltx_font_italic" id="bib.bib53.1.1">Findings of the Association for Computational Linguistics: ACL 2022</em>, pp.  2639–2650, Dublin, Ireland, May 2022. Association for Computational Linguistics.
+
+</span>
+<span class="ltx_bibblock">doi: <span class="ltx_ref ltx_nolink ltx_Url ltx_ref_self">10.18653/v1/2022.findings-acl.207</span>.
+
+</span>
+<span class="ltx_bibblock">URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://aclanthology.org/2022.findings-acl.207/" title="">https://aclanthology.org/2022.findings-acl.207/</a>.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib54">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Yue et al. (2024)</span>
+<span class="ltx_bibblock">
+Xiang Yue, Yuansheng Ni, Kai Zhang, Tianyu Zheng, Ruoqi Liu, Ge Zhang, Samuel Stevens, Dongfu Jiang, Weiming Ren, Yuxuan Sun, et al.
+
+</span>
+<span class="ltx_bibblock">Mmmu: A massive multi-discipline multimodal understanding and reasoning benchmark for expert agi.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib54.1.1">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em>, pp.  9556–9567, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib55">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al. (2024)</span>
+<span class="ltx_bibblock">
+Xinrong Zhang, Yingfa Chen, Shengding Hu, Zihang Xu, Junhao Chen, Moo Hao, Xu Han, Zhen Thai, Shuo Wang, Zhiyuan Liu, et al.
+
+</span>
+<span class="ltx_bibblock"><math alttext="\infty" class="ltx_Math" display="inline" id="bib.bib55.1.m1.1"><semantics id="bib.bib55.1.m1.1a"><mi id="bib.bib55.1.m1.1.1" mathvariant="normal" xref="bib.bib55.1.m1.1.1.cmml">∞</mi><annotation-xml encoding="MathML-Content" id="bib.bib55.1.m1.1b"><infinity id="bib.bib55.1.m1.1.1.cmml" xref="bib.bib55.1.m1.1.1"></infinity></annotation-xml><annotation encoding="application/x-tex" id="bib.bib55.1.m1.1c">\infty</annotation><annotation encoding="application/x-llamapun" id="bib.bib55.1.m1.1d">∞</annotation></semantics></math> bench: Extending long context evaluation beyond 100k tokens.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib55.2.1">Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)</em>, pp.  15262–15277, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib56">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhao et al. (2025)</span>
+<span class="ltx_bibblock">
+Siyan Zhao, Mingyi Hong, Yang Liu, Devamanyu Hazarika, and Kaixiang Lin.
+
+</span>
+<span class="ltx_bibblock">Do llms recognize your preferences? evaluating personalized preference following in llms.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib56.1.1">The thirteenth international conference on learning representations</em>, 2025.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib57">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zheng et al. (2024)</span>
+<span class="ltx_bibblock">
+Huaixiu Steven Zheng, Swaroop Mishra, Hugh Zhang, Xinyun Chen, Minmin Chen, Azade Nova, Le Hou, Heng-Tze Cheng, Quoc V Le, Ed H Chi, et al.
+
+</span>
+<span class="ltx_bibblock">Natural plan: Benchmarking llms on natural language planning.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib57.1.1">arXiv preprint arXiv:2406.04520</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib58">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhou et al. (2023)</span>
+<span class="ltx_bibblock">
+Jeffrey Zhou, Tianjian Lu, Swaroop Mishra, Siddhartha Brahma, Sujoy Basu, Yi Luan, Denny Zhou, and Le Hou.
+
+</span>
+<span class="ltx_bibblock">Instruction-following evaluation for large language models.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib58.1.1">arXiv preprint arXiv:2311.07911</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib59">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zollo et al. (2024)</span>
+<span class="ltx_bibblock">
+Thomas P Zollo, Andrew Wei Tung Siah, Naimeng Ye, Ang Li, and Hongseok Namkoong.
+
+</span>
+<span class="ltx_bibblock">Personalllm: Tailoring llms to individual preferences.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib59.1.1">arXiv preprint arXiv:2409.20296</em>, 2024.
+
+</span>
+</li>
+</ul>
+</section>
+<div class="ltx_pagination ltx_role_newpage"></div>
+<section class="ltx_appendix" id="A1">
+<h2 class="ltx_title ltx_title_appendix">
+<span class="ltx_tag ltx_tag_appendix">Appendix A </span>Details on Human Evaluation</h2>
+<div class="ltx_para ltx_noindent" id="A1.p1">
+<p class="ltx_p" id="A1.p1.1">The purpose of the human evaluation study is to validate the overall quality of the generation process described in § <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S3" title="3 Constructing Examples in PersonaMem At Scale ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">3</span></a>. Note that we are not asking for human performance on the questions, given the intractability of reading the long contexts. Instead, we provide evaluators with the questions and answers, as well as the conversations and meta-data that they are grounded in.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="A1.p2">
+<p class="ltx_p" id="A1.p2.1">We use the potato package <cite class="ltx_cite ltx_citemacro_citep">(Pei et al., <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib35" title="">2022</a>)</cite> for implementation of the interface. A screenshot is shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#A1.F7" title="Figure 7 ‣ Appendix A Details on Human Evaluation ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">7</span></a>.
+For each entry, we ask for True/False evaluations on 4 dimensions:</p>
+<ol class="ltx_enumerate" id="A1.I1">
+<li class="ltx_item" id="A1.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span>
+<div class="ltx_para" id="A1.I1.i1.p1">
+<p class="ltx_p" id="A1.I1.i1.p1.1">Appropriateness: The question is well-formed and corresponds to the type.</p>
+</div>
+</li>
+<li class="ltx_item" id="A1.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span>
+<div class="ltx_para" id="A1.I1.i2.p1">
+<p class="ltx_p" id="A1.I1.i2.p1.1">Relevance: The question is relevant to the conversation and persona.</p>
+</div>
+</li>
+<li class="ltx_item" id="A1.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">3.</span>
+<div class="ltx_para" id="A1.I1.i3.p1">
+<p class="ltx_p" id="A1.I1.i3.p1.1">Correctness: ‘Correct_Response’ is indeed correct, and can be derived from the context.</p>
+</div>
+</li>
+<li class="ltx_item" id="A1.I1.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">4.</span>
+<div class="ltx_para ltx_noindent" id="A1.I1.i4.p1">
+<p class="ltx_p" id="A1.I1.i4.p1.1">Best Response: ‘Correct_Response’ is better than all of the ‘Incorrect_Responses.’</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="ltx_para ltx_noindent" id="A1.p3">
+<p class="ltx_p" id="A1.p3.1">We recruited three human annotators from within our institutions, who agreed to volunteer their time. All annotators are fluent English speakers working in academia. We iterated the annotation instructions and template with active feedback from the annotators, leading to the finalized version.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="A1.p4">
+<p class="ltx_p" id="A1.p4.1">We selected 90 entries (18 topics * 5 randomly sampled questions each) for annotation. To ease annotator mental load, all entries come from a single persona. Each entry is annotated 3 times, and we assign the majority class label. Each task took about 1.5 minutes to complete.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="A1.p5">
+<p class="ltx_p" id="A1.p5.1">For each entry and each dimension, we calculate the proportion of ‘True’, as well as We calculate inter-rater reliability with Gwet’s AC1 <cite class="ltx_cite ltx_citemacro_citep">(Gwet, <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#bib.bib14" title="">2008</a>)</cite>. We use this metric as it accounts for the heavy class imbalance towards True.
+Considering the results, 97.8% of entries were rated as appropriate (AC1=0.928), 95.6% as relevance (AC1=0.899), 97.8% as correct (AC1=0.877), and 90% as being the best response (AC1=0.560). All proportions are over 90%, and agreement is very high for dimensions 1,2, and 3, and moderate for dimension 4 (likely because it is subjective). Given this small-scale human evaluation, we can conclude that the generation quality of <span class="ltx_text ltx_font_smallcaps" id="A1.p5.1.1">PersonaMem</span> is quite reasonable.</p>
+</div>
+<figure class="ltx_figure" id="A1.F7"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_square" height="483" id="A1.F7.g1" src="extracted/6370758/figures/eval_interface.png" width="568"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 7: </span>A screenshot of the human evaluation task for  <span class="ltx_text ltx_font_smallcaps" id="A1.F7.3.1">PersonaMem</span> entries. We abbreviate the long conversational session with ‘…’ here; annotators see the full text (average of 15 turns/session).
+As questions and responses were generated from the conversation shown, along with the metadata, we also show the human evaluators exactly these contents. The fields highlighted in <span class="ltx_text" id="A1.F7.4.2" style="color:#0000FF;">blue</span> are those which are directly referenced in the 4 questions.</figcaption>
+</figure>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</section>
+<section class="ltx_appendix" id="A2">
+<h2 class="ltx_title ltx_title_appendix">
+<span class="ltx_tag ltx_tag_appendix">Appendix B </span>Supplementary Experiment Results</h2>
+<figure class="ltx_figure" id="A2.F8"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="270" id="A2.F8.g1" src="x7.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 8: </span>Results across different models on 7 in-situ query types over 1M tokens. Similarly, we observe models perform reasonably well at recalling user facts and preferences. However, models struggle at providing novel suggestions, or applying users’ preferences in new scenarios.</figcaption>
+</figure>
+<figure class="ltx_figure" id="A2.F9"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="263" id="A2.F9.g1" src="x8.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 9: </span>Performance on different question types for GPT-4o and GPT-4o-mini with 128k-token contexts. We compare vanilla models to the ones with the RAG setup.</figcaption>
+</figure>
+<div class="ltx_para ltx_noindent" id="A2.p1">
+<p class="ltx_p" id="A2.p1.1">Figure <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#A2.F8" title="Figure 8 ‣ Appendix B Supplementary Experiment Results ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">8</span></a> presents model performance across various question-answering types with a 1M-token context, demonstrating patterns similar to those observed in Figure <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.F3" title="Figure 3 ‣ 4.2 Evaluating Language Models in Long-Context Settings ‣ 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">3</span></a>.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="A2.p2">
+<p class="ltx_p" id="A2.p2.1">Figure <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#A2.F9" title="Figure 9 ‣ Appendix B Supplementary Experiment Results ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">9</span></a> presents the performance of models enhanced with Retrieval-Augmented Generation (RAG) modules over a 128K-token context. Consistent with the results in Figure <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#S4.F5" title="Figure 5 ‣ 4.4 Evaluation with External Memory Modules ‣ 4 Experiment ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">5</span></a>, RAG contributes to improved performance on most question types.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="A2.p3">
+<p class="ltx_p" id="A2.p3.1">Figure <a class="ltx_ref" href="https://arxiv.org/html/2504.14225v1#A2.F10" title="Figure 10 ‣ Appendix B Supplementary Experiment Results ‣ Know Me, Respond to Me: Benchmarking LLMs for Dynamic User Profiling and Personalized Responses at Scale"><span class="ltx_text ltx_ref_tag">10</span></a> shows the performance with respect to the number of sessions elapsed since the most recent preferences were mentioned in the conversation history. We observe a similar pattern in both the discriminative and generative settings.</p>
+</div>
+<figure class="ltx_figure" id="A2.F10"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="262" id="A2.F10.g1" src="x9.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 10: </span>Generative evaluation on 10-session (32k token length) version of <span class="ltx_text ltx_font_smallcaps" id="A2.F10.2.1">PersonaMem</span></figcaption>
+</figure>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</section>
+<section class="ltx_appendix" id="A3">
+<h2 class="ltx_title ltx_title_appendix">
+<span class="ltx_tag ltx_tag_appendix">Appendix C </span>Prompts Used in <img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="14" id="A3.1.g1" src="extracted/6370758/figures/silhouette-emoji.png" width="13"/> <span class="ltx_text ltx_font_smallcaps" id="A3.3.1">PersonaMem</span>  Dataset Generation</h2>
+<figure class="ltx_figure" id="A3.F11"><svg class="ltx_picture" height="428.83" id="A3.F11.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,428.83) matrix(1 0 0 -1 0 0)"><g fill="#005900" fill-opacity="1.0"><path d="M 0 5.91 L 0 422.93 C 0 426.19 2.64 428.83 5.91 428.83 L 594.09 428.83 C 597.36 428.83 600 426.19 600 422.93 L 600 5.91 C 600 2.64 597.36 0 594.09 0 L 5.91 0 C 2.64 0 0 2.64 0 5.91 Z" style="stroke:none"></path></g><g fill="#F2FFF2" fill-opacity="1.0"><path d="M 1.97 5.91 L 1.97 404.72 L 598.03 404.72 L 598.03 5.91 C 598.03 3.73 596.27 1.97 594.09 1.97 L 5.91 1.97 C 3.73 1.97 1.97 3.73 1.97 5.91 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 21.65 410.63)"><foreignobject color="#FFFFFF" height="12.3" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="556.69">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="A3.F11.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1" style="width:402.3pt;">
+<span class="ltx_p" id="A3.F11.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="A3.F11.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1">Persona Description <math alttext="\Rightarrow" class="ltx_Math" display="inline" id="A3.F11.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.m1.1"><semantics id="A3.F11.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.m1.1a"><mo id="A3.F11.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.m1.1.1" stretchy="false" xref="A3.F11.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.m1.1.1.cmml">⇒</mo><annotation-xml encoding="MathML-Content" id="A3.F11.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.m1.1b"><ci id="A3.F11.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.m1.1.1.cmml" xref="A3.F11.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.m1.1.1">⇒</ci></annotation-xml><annotation encoding="application/x-tex" id="A3.F11.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.m1.1c">\Rightarrow</annotation><annotation encoding="application/x-llamapun" id="A3.F11.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.m1.1d">⇒</annotation></semantics></math> Initial General User Profile and Preferences</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 21.65 13.78)"><foreignobject color="#000000" height="379.13" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="556.69">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="A3.F11.pic1.2.2.2.1.1" style="width:402.3pt;">
+<span class="ltx_p" id="A3.F11.pic1.2.2.2.1.1.1">Given the following persona, expand it with 10 person’s general background history within ten years starting at {start_time}. Turn each point into the format of a bullet point, and add a timestamp in the format of MM/DD/YYYY for each bullet point. Remember that these events should be general like career development, and they will be shared across multiple different topics.You should mention both daily activities and important key milestones, and both positive and negative history events. Also relate history to what this person prefers and dislikes. Use JSON format where each timestamp is a key in the JSON dictionary. Each point should also be marked with labels of either [’Short-Term’] or [’Long-Term’], where short-term fact refers to something happening daily, which can be irrelevant to the persona like what the person eats, which should come with temporal quantifiers like ’today’ or so, but long-term fact refers to some key personas that won’t be changed for at least a year. There should be 5 short-term and 5 long-term events. Include all 10 things this person likes and dislikes mentioned in the persona, and rewrite them as appropriate events. All events must have an appropriate time stamp in the format of MM/DD/YYYY. List at least 10 events, more are welcome.</span>
+<span class="ltx_p" id="A3.F11.pic1.2.2.2.1.1.2">Here is the template you should follow for each event:</span>
+<span class="ltx_p" id="A3.F11.pic1.2.2.2.1.1.3">”MM/DD/YYYY”: {</span>
+<span class="ltx_p" id="A3.F11.pic1.2.2.2.1.1.4">”Event”: xxx,</span>
+<span class="ltx_p" id="A3.F11.pic1.2.2.2.1.1.5">”Category”: ”Short-Term” OR ”Long-Term”</span>
+<span class="ltx_p" id="A3.F11.pic1.2.2.2.1.1.6">},</span>
+<span class="ltx_p" id="A3.F11.pic1.2.2.2.1.1.7">Do NOT modify the names of these keys. Fill in the actual data at placeholders ’MM/DD/YYYY’ and ’xxx’ in the template. Please use DOUBLE quotes in order to generate the correct JSON format.</span>
+<span class="ltx_p" id="A3.F11.pic1.2.2.2.1.1.8">Here is the persona: {persona}</span>
+</span></foreignobject></g></g></svg>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 11: </span>Prompt for generating user profile given a short persona description.</figcaption>
+</figure>
+<figure class="ltx_figure" id="A3.F12"><svg class="ltx_picture" height="740.09" id="A3.F12.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,740.09) matrix(1 0 0 -1 0 0)"><g fill="#005900" fill-opacity="1.0"><path d="M 0 5.91 L 0 734.18 C 0 737.45 2.64 740.09 5.91 740.09 L 594.09 740.09 C 597.36 740.09 600 737.45 600 734.18 L 600 5.91 C 600 2.64 597.36 0 594.09 0 L 5.91 0 C 2.64 0 0 2.64 0 5.91 Z" style="stroke:none"></path></g><g fill="#F2FFF2" fill-opacity="1.0"><path d="M 1.97 5.91 L 1.97 715.98 L 598.03 715.98 L 598.03 5.91 C 598.03 3.73 596.27 1.97 594.09 1.97 L 5.91 1.97 C 3.73 1.97 1.97 3.73 1.97 5.91 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 21.65 721.89)"><foreignobject color="#FFFFFF" height="12.3" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="556.69">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="A3.F12.pic1.1.1.1.1.1" style="width:402.3pt;">
+<span class="ltx_p" id="A3.F12.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="A3.F12.pic1.1.1.1.1.1.1.1">Generating task-specific user preferences.</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 21.65 13.78)"><foreignobject color="#000000" height="690.39" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="556.69">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="A3.F12.pic1.2.2.2.1.1" style="width:402.3pt;">
+<span class="ltx_p" id="A3.F12.pic1.2.2.2.1.1.1">Here is the persona:</span>
+<span class="ltx_p" id="A3.F12.pic1.2.2.2.1.1.2">{persona}</span>
+<span class="ltx_p" id="A3.F12.pic1.2.2.2.1.1.3">Here are some events related to the person’s general background history:</span>
+<span class="ltx_p" id="A3.F12.pic1.2.2.2.1.1.4">{general_personal_history}</span>
+<span class="ltx_p" id="A3.F12.pic1.2.2.2.1.1.5">Given the persona above, please first list 20 hobbies related to {task}. Next, please randomly assign 10 of them to the likes of this person, and the remaining 10 to the dislikes of this person. Make sure every hobby, regardless of whether it is a like or dislike, is unique and attractive in common, so that the exact dislikes can potentially be turned into likes in the future. please list 10 unique personal hobbies and 10 things this person dislikes but others might still like, using bullet points, related to {task}. Next, write 10 more events related to the topic of {task}. Think about how this person’s general background history may affect their events under {task}.</span>
+<span class="ltx_p" id="A3.F12.pic1.2.2.2.1.1.6">Include all these 20 new things this person likes and dislikes, and rewrite them as appropriate events.Do NOT mention anything already mentioned above. Do NOT mention anything about the general personal history, like the professional development. Each event must come with the related personal hobbies or dislikes, marked using a key ’[Fact] Likes:’ or ’[Fact] Dislikes:’ closely associated with the 20 things you listed here, and they should concentrate on the topic of{task}. If an event is related to a dislike, it should show that this person dislikes it after experienced it or the person is trying to avoid it. Use the same JSON format with MM/DD/YYYY timestamp from {start_time}, and use short-term/long-term labels as above. There should be 10 short-term and 10 long-term events.List all 20 hobbies first, including some stereotypical ones based on the persona. Mark stereotypical ones by square brackets ’[stereotypical]’. Next, randomly assign those 20 hobbies into likes or dislikes for this person. After you have generated the list above, generate one dict for each event following those 20 likes and dislikes. List all 20 hobbies first, and then follow this template in string to randomly assign those 20 hobbies into likes or dislikes for this person:</span>
+<span class="ltx_p" id="A3.F12.pic1.2.2.2.1.1.7">20 hobbies: xxx, …, xxx</span>
+<span class="ltx_p" id="A3.F12.pic1.2.2.2.1.1.8">Initial preferences randomly assigned: [1] Likes xxx (Add [stereotypical] here if appropriate, same for each of the 20 rows below)
+[2] Likes xxx
+[3] Likes xxx
+[4] Likes xxx
+[5] Likes xxx
+[6] Likes xxx
+[7] Likes xxx
+[8] Likes xxx
+[9] Likes xxx
+[10] Likes xxx
+[1] Dislikes xxx
+[2] Dislikes xxx
+[3] Dislikes xxx
+[4] Dislikes xxx
+[5] Dislikes xxx
+[6] Dislikes xxx
+[7] Dislikes xxx
+[8] Dislikes xxx
+[9] Dislikes xxx
+[10] Dislikes xxx</span>
+<span class="ltx_p" id="A3.F12.pic1.2.2.2.1.1.9">After you have generated the list above, here is the template in JSON you should follow for each event. PLEASE MUST USE JSON FOR THIS PART:</span>
+<span class="ltx_p" id="A3.F12.pic1.2.2.2.1.1.10">”MM/DD/YYYY”:</span>
+<span class="ltx_p" id="A3.F12.pic1.2.2.2.1.1.11">”Event”: xxx,</span>
+<span class="ltx_p" id="A3.F12.pic1.2.2.2.1.1.12">”Category”: ”Short-Term” OR ”Long-Term”</span>
+<span class="ltx_p" id="A3.F12.pic1.2.2.2.1.1.13">”[Fact] Likes” OR ”[Fact] Dislikes”: xxx,</span>
+<span class="ltx_p" id="A3.F12.pic1.2.2.2.1.1.14">,</span>
+<span class="ltx_p" id="A3.F12.pic1.2.2.2.1.1.15">Do NOT modify the names of these keys. Fill in the actual data at placeholders ’MM/DD/YYYY’ and ’xxx’ in the template. Please use DOUBLE quotes in order to generate the correct JSON format.</span>
+</span></foreignobject></g></g></svg>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 12: </span>Prompt for generating user profile given a short persona description.</figcaption>
+</figure>
+<figure class="ltx_figure" id="A3.F13"><svg class="ltx_picture" height="378.87" id="A3.F13.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,378.87) matrix(1 0 0 -1 0 0)"><g fill="#005900" fill-opacity="1.0"><path d="M 0 5.91 L 0 372.96 C 0 376.22 2.64 378.87 5.91 378.87 L 594.09 378.87 C 597.36 378.87 600 376.22 600 372.96 L 600 5.91 C 600 2.64 597.36 0 594.09 0 L 5.91 0 C 2.64 0 0 2.64 0 5.91 Z" style="stroke:none"></path></g><g fill="#F2FFF2" fill-opacity="1.0"><path d="M 1.97 5.91 L 1.97 354.91 L 598.03 354.91 L 598.03 5.91 C 598.03 3.73 596.27 1.97 594.09 1.97 L 5.91 1.97 C 3.73 1.97 1.97 3.73 1.97 5.91 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 21.65 360.82)"><foreignobject color="#FFFFFF" height="12.15" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="556.69">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="A3.F13.pic1.1.1.1.1.1" style="width:402.3pt;">
+<span class="ltx_p" id="A3.F13.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="A3.F13.pic1.1.1.1.1.1.1.1">Generating conversation session.</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 21.65 13.78)"><foreignobject color="#000000" height="329.32" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="556.69">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="A3.F13.pic1.2.2.2.1.1" style="width:402.3pt;">
+<span class="ltx_p" id="A3.F13.pic1.2.2.2.1.1.1">Your task is to rewrite the following list of events related to a personal history as a format of conversation record under the topic of {task}. The conversation should strictly follow each event mentioned by the personal history and explicitly mention these events one by one, using them and their time stamps of the format MM/DD/YYYY as the skeleton. Do NOT change the time stamps. Think about what the person’s persona and history could cause trouble so that the person seeks a {agent role}. Write the conversation as a list of string, where each sentence is an element in the list and starts with either {user role}, {agent role}, or ’Side_Note’.Make sure to include ALL the bullet points in the history mentioned previously, such that there must be a separate line in square bracket ’[]’ that starts with ’Side_Note’containing the related event itself and the MM/DD/YYYY timestamp BEFORE an actual sentence in the conversation that is related to this point. Do not mention underlying ’[Fact]’ of the event. Do NOT modify any MM/DD/YYYY above. If a sentence is not relevant to any bullet point, no need for the ’Side_Note’ before it. The {user role}s conversation should clearly include detailed info about these events, while ensuring the conversation is LONG enough and contain other information and details to make it long. If the personal history mentions about any ’[Reasons of Change]’, make sure to mention them naturally in the conversation and show that the person has changed the like/dislike attitude towards it, but avoid talking about the corresponding ’[Old Event]’ explicitly.</span>
+<span class="ltx_p" id="A3.F13.pic1.2.2.2.1.1.2">Make sure to include all mentioned reasons and intentions for any changes naturally in the new conversation.</span>
+<span class="ltx_p" id="A3.F13.pic1.2.2.2.1.1.3">Here is the persona: {persona} and the detailed background development history:</span>
+<span class="ltx_p" id="A3.F13.pic1.2.2.2.1.1.4">{user profile}</span>
+</span></foreignobject></g></g></svg>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 13: </span>Prompt for generating user profile given a short persona description.</figcaption>
+</figure>
+<figure class="ltx_figure" id="A3.F14"><svg class="ltx_picture" height="308.38" id="A3.F14.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,308.38) matrix(1 0 0 -1 0 0)"><g fill="#005900" fill-opacity="1.0"><path d="M 0 5.91 L 0 302.47 C 0 305.73 2.64 308.38 5.91 308.38 L 594.09 308.38 C 597.36 308.38 600 305.73 600 302.47 L 600 5.91 C 600 2.64 597.36 0 594.09 0 L 5.91 0 C 2.64 0 0 2.64 0 5.91 Z" style="stroke:none"></path></g><g fill="#F2FFF2" fill-opacity="1.0"><path d="M 1.97 5.91 L 1.97 284.27 L 598.03 284.27 L 598.03 5.91 C 598.03 3.73 596.27 1.97 594.09 1.97 L 5.91 1.97 C 3.73 1.97 1.97 3.73 1.97 5.91 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 21.65 290.17)"><foreignobject color="#FFFFFF" height="12.3" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="556.69">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="A3.F14.pic1.1.1.1.1.1" style="width:402.3pt;">
+<span class="ltx_p" id="A3.F14.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="A3.F14.pic1.1.1.1.1.1.1.1">Generating “Recall User Facts” <em class="ltx_emph ltx_font_italic" id="A3.F14.pic1.1.1.1.1.1.1.1.1">in-situ</em> queries.</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 21.65 13.78)"><foreignobject color="#000000" height="258.68" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="556.69">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="A3.F14.pic1.2.2.2.1.1" style="width:402.3pt;">
+<span class="ltx_p" id="A3.F14.pic1.2.2.2.1.1.1">We want to evaluate whether a chatbot can remember factual information (NOT the user’s preferences toward it) shared by the user during previous conversations, and whether the model can utilize its memory to provide a personalized response. Given this specific activity</span>
+<span class="ltx_p" id="A3.F14.pic1.2.2.2.1.1.2">{Related User Fact}</span>
+<span class="ltx_p" id="A3.F14.pic1.2.2.2.1.1.3">described by the user in a conversation with the chatbot:</span>
+<span class="ltx_p" id="A3.F14.pic1.2.2.2.1.1.4">{user utterance}</span>
+<span class="ltx_p" id="A3.F14.pic1.2.2.2.1.1.5">What question might the user query the chatbot model to bring up this topic again? Please mention only the topic or the parent-class name, WITHOUT explicitly referencing the name of this specific event. Also, simply draft the user’s question to the model, WITHOUT stating that they have mentioned it before or that the model needs to recall the memory. Make the user question more detailed with some topic. Remember that the user is asking this question to an LLM, not a real human. Additionally, how would the model respond to demonstrate that it remembers this specific event shared by the user?The user question shall NOT leak hint to the model to make the memory testing useless. Always follow the template below:</span>
+<span class="ltx_p" id="A3.F14.pic1.2.2.2.1.1.6">{
+”User Question”: xxx,
+”Model Response”: yyy
+}.</span>
+<span class="ltx_p" id="A3.F14.pic1.2.2.2.1.1.7">Do NOT modify the names of these keys. Please use DOUBLE quotes in order to generate the correct JSON format. No other words.</span>
+</span></foreignobject></g></g></svg>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 14: </span>Prompt for generating “Recall User Facts” <em class="ltx_emph ltx_font_italic" id="A3.F14.2.1">in-situ</em> queries.</figcaption>
+</figure>
+<figure class="ltx_figure" id="A3.F15"><svg class="ltx_picture" height="324.98" id="A3.F15.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,324.98) matrix(1 0 0 -1 0 0)"><g fill="#005900" fill-opacity="1.0"><path d="M 0 5.91 L 0 319.07 C 0 322.34 2.64 324.98 5.91 324.98 L 594.09 324.98 C 597.36 324.98 600 322.34 600 319.07 L 600 5.91 C 600 2.64 597.36 0 594.09 0 L 5.91 0 C 2.64 0 0 2.64 0 5.91 Z" style="stroke:none"></path></g><g fill="#F2FFF2" fill-opacity="1.0"><path d="M 1.97 5.91 L 1.97 300.87 L 598.03 300.87 L 598.03 5.91 C 598.03 3.73 596.27 1.97 594.09 1.97 L 5.91 1.97 C 3.73 1.97 1.97 3.73 1.97 5.91 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 21.65 306.78)"><foreignobject color="#FFFFFF" height="12.3" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="556.69">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="A3.F15.pic1.1.1.1.1.1" style="width:402.3pt;">
+<span class="ltx_p" id="A3.F15.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="A3.F15.pic1.1.1.1.1.1.1.1">Generating “Suggest New Ideas” <em class="ltx_emph ltx_font_italic" id="A3.F15.pic1.1.1.1.1.1.1.1.1">in-situ</em> queries.</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 21.65 13.78)"><foreignobject color="#000000" height="275.28" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="556.69">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="A3.F15.pic1.2.2.2.1.1" style="width:402.3pt;">
+<span class="ltx_p" id="A3.F15.pic1.2.2.2.1.1.1">We aim to assess whether a chatbot can recall a user’s most recent preference for a specific type of {task} and provide a personalized recommendation based on this preference. Consider the user’s latest preference: {user preference} and what they have said: {user utterance}</span>
+<span class="ltx_p" id="A3.F15.pic1.2.2.2.1.1.2">Formulate a question the user might ask the chatbot for a recommendation in the future WITHOUT explicitly referencing their previous preferences. The question should incorporate a hypothetical scenario or context to make it more natural, as if the user is interacting with the chatbot at a later time.Remember that the user is asking this question to an LLM, not a real human. Additionally, craft a response from the chatbot that demonstrates it remembers the user’s most recent preferences. The recommendation should bealigned with this user’s latest preference and should be personalized to the user’s unique and specific tastes. Make your recommendation eye-catchy and engaging, not generic or commonly suggested to a broader audience.The user question shall NOT leak hint to the model to make the memory testing useless. Always follow the template below:</span>
+<span class="ltx_p" id="A3.F15.pic1.2.2.2.1.1.3">{
+”User Question”: xxx,
+”Model Response”: yyy
+}.</span>
+<span class="ltx_p" id="A3.F15.pic1.2.2.2.1.1.4">Do NOT modify the names of these keys. Fill in the actual data at placeholders ’xxx’ and ’yyy’ in the template. Please use DOUBLE quotes in order to generate the correct JSON format. No other words.</span>
+</span></foreignobject></g></g></svg>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 15: </span>Prompt for generating “Suggest New Ideas” <em class="ltx_emph ltx_font_italic" id="A3.F15.2.1">in-situ</em> queries.</figcaption>
+</figure>
+<figure class="ltx_figure" id="A3.F16"><svg class="ltx_picture" height="324.98" id="A3.F16.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,324.98) matrix(1 0 0 -1 0 0)"><g fill="#005900" fill-opacity="1.0"><path d="M 0 5.91 L 0 319.07 C 0 322.34 2.64 324.98 5.91 324.98 L 594.09 324.98 C 597.36 324.98 600 322.34 600 319.07 L 600 5.91 C 600 2.64 597.36 0 594.09 0 L 5.91 0 C 2.64 0 0 2.64 0 5.91 Z" style="stroke:none"></path></g><g fill="#F2FFF2" fill-opacity="1.0"><path d="M 1.97 5.91 L 1.97 300.87 L 598.03 300.87 L 598.03 5.91 C 598.03 3.73 596.27 1.97 594.09 1.97 L 5.91 1.97 C 3.73 1.97 1.97 3.73 1.97 5.91 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 21.65 306.78)"><foreignobject color="#FFFFFF" height="12.3" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="556.69">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="A3.F16.pic1.1.1.1.1.1" style="width:402.3pt;">
+<span class="ltx_p" id="A3.F16.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="A3.F16.pic1.1.1.1.1.1.1.1">Generating “Acknowledge latest user preferences” <em class="ltx_emph ltx_font_italic" id="A3.F16.pic1.1.1.1.1.1.1.1.1">in-situ</em> queries.</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 21.65 13.78)"><foreignobject color="#000000" height="275.28" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="556.69">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="A3.F16.pic1.2.2.2.1.1" style="width:402.3pt;">
+<span class="ltx_p" id="A3.F16.pic1.2.2.2.1.1.1">We aim to assess whether a chatbot can recall a user’s most recent preference for a specific type of {task} and provide a personalized recommendation based on this preference. Consider the user’s latest preference: {user preference} and what they have said: {user utterance}</span>
+<span class="ltx_p" id="A3.F16.pic1.2.2.2.1.1.2">Formulate a question the user might ask the chatbot for a recommendation in the future WITHOUT explicitly referencing their previous preferences. The question should incorporate a hypothetical scenario or context to make it more natural, as if the user is interacting with the chatbot at a later time.Remember that the user is asking this question to an LLM, not a real human. Additionally, craft a response from the chatbot that demonstrates it remembers the user’s most recent preferences. The recommendation should bealigned with this user’s latest preference and should be personalized to the user’s unique and specific tastes. Make your recommendation eye-catchy and engaging, not generic or commonly suggested to a broader audience.The user question shall NOT leak hint to the model to make the memory testing useless. Always follow the template below:</span>
+<span class="ltx_p" id="A3.F16.pic1.2.2.2.1.1.3">{
+”User Question”: xxx,
+”Model Response”: yyy
+}.</span>
+<span class="ltx_p" id="A3.F16.pic1.2.2.2.1.1.4">Do NOT modify the names of these keys. Fill in the actual data at placeholders ’xxx’ and ’yyy’ in the template. Please use DOUBLE quotes in order to generate the correct JSON format. No other words.</span>
+</span></foreignobject></g></g></svg>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 16: </span>Prompt for generating “Acknowledge latest user preferences” <em class="ltx_emph ltx_font_italic" id="A3.F16.2.1">in-situ</em> queries.</figcaption>
+</figure>
+<figure class="ltx_figure" id="A3.F17"><svg class="ltx_picture" height="258.56" id="A3.F17.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,258.56) matrix(1 0 0 -1 0 0)"><g fill="#005900" fill-opacity="1.0"><path d="M 0 5.91 L 0 252.66 C 0 255.92 2.64 258.56 5.91 258.56 L 594.09 258.56 C 597.36 258.56 600 255.92 600 252.66 L 600 5.91 C 600 2.64 597.36 0 594.09 0 L 5.91 0 C 2.64 0 0 2.64 0 5.91 Z" style="stroke:none"></path></g><g fill="#F2FFF2" fill-opacity="1.0"><path d="M 1.97 5.91 L 1.97 234.45 L 598.03 234.45 L 598.03 5.91 C 598.03 3.73 596.27 1.97 594.09 1.97 L 5.91 1.97 C 3.73 1.97 1.97 3.73 1.97 5.91 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 21.65 240.36)"><foreignobject color="#FFFFFF" height="12.3" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="556.69">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="A3.F17.pic1.1.1.1.1.1" style="width:402.3pt;">
+<span class="ltx_p" id="A3.F17.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="A3.F17.pic1.1.1.1.1.1.1.1">Generating “Track Full Preference Evolution” in-situ queries</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 21.65 13.78)"><foreignobject color="#000000" height="208.86" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="556.69">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="A3.F17.pic1.2.2.2.1.1" style="width:402.3pt;">
+<span class="ltx_p" id="A3.F17.pic1.2.2.2.1.1.1">We are designing a memory benchmark focused on personalization. Consider the following sequence of user preference changes:</span>
+<span class="ltx_p" id="A3.F17.pic1.2.2.2.1.1.2">{full sequence}</span>
+<span class="ltx_p" id="A3.F17.pic1.2.2.2.1.1.3">The right most one is the most recent update, which the user mentioned that: {user utterance}</span>
+<span class="ltx_p" id="A3.F17.pic1.2.2.2.1.1.4">When the user mentions their most recent preference, how should the model respond to demonstrate that it remembers the entire sequence of preference changes, not just the latest one? Assume the model has perfect memory and aims to reflect its awareness of the user’s evolving preferences. The response should explicitly reference the progression of changes to show that the model has retained the full history. Emphasis should be on the sequence of changes rather than the final state of preferences.Always follow the template below:</span>
+<span class="ltx_p" id="A3.F17.pic1.2.2.2.1.1.5">{
+”User Question”: xxx,
+”Model Response”: yyy
+}.</span>
+<span class="ltx_p" id="A3.F17.pic1.2.2.2.1.1.6">Do NOT modify the names of these keys. Fill in the actual data at placeholders ’xxx’ and ’yyy’ in the template. Please use DOUBLE quotes in order to generate the correct JSON format. No other words.</span>
+</span></foreignobject></g></g></svg>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 17: </span>Prompt for generating “Track Full Preference Evolution” <em class="ltx_emph ltx_font_italic" id="A3.F17.2.1">in-situ</em> queries.</figcaption>
+</figure>
+<figure class="ltx_figure" id="A3.F18"><svg class="ltx_picture" height="308.38" id="A3.F18.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,308.38) matrix(1 0 0 -1 0 0)"><g fill="#005900" fill-opacity="1.0"><path d="M 0 5.91 L 0 302.47 C 0 305.73 2.64 308.38 5.91 308.38 L 594.09 308.38 C 597.36 308.38 600 305.73 600 302.47 L 600 5.91 C 600 2.64 597.36 0 594.09 0 L 5.91 0 C 2.64 0 0 2.64 0 5.91 Z" style="stroke:none"></path></g><g fill="#F2FFF2" fill-opacity="1.0"><path d="M 1.97 5.91 L 1.97 284.27 L 598.03 284.27 L 598.03 5.91 C 598.03 3.73 596.27 1.97 594.09 1.97 L 5.91 1.97 C 3.73 1.97 1.97 3.73 1.97 5.91 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 21.65 290.17)"><foreignobject color="#FFFFFF" height="12.3" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="556.69">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="A3.F18.pic1.1.1.1.1.1" style="width:402.3pt;">
+<span class="ltx_p" id="A3.F18.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="A3.F18.pic1.1.1.1.1.1.1.1">Generating “Generalize to new scenarios” <em class="ltx_emph ltx_font_italic" id="A3.F18.pic1.1.1.1.1.1.1.1.1">in-situ</em> queries.</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 21.65 13.78)"><foreignobject color="#000000" height="258.68" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="556.69">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="A3.F18.pic1.2.2.2.1.1" style="width:402.3pt;">
+<span class="ltx_p" id="A3.F18.pic1.2.2.2.1.1.1">The user has mentioned the detailed reason below of their preference update in previous conversations:</span>
+<span class="ltx_p" id="A3.F18.pic1.2.2.2.1.1.2">{event}</span>
+<span class="ltx_p" id="A3.F18.pic1.2.2.2.1.1.3">You should focus on the [Reasons of Change] part. We actually want to evaluate if the model can remember and utilize this reason of change as a motivation to this user, and then generalize the reason to other scenarios the same user might say in the near future during the conversation, not the event or activity itself. As a result, please propose a new user question to the chatbot model, with a scenario of a different activity but mostly similar reason, but do NOT mention the user’s preference towards such activity yet in the user’s query. Remember that the user is asking this question to an LLM, not a real human. Please also propose a model’s response to assume the user’s preference based on this reason. The model can also do proactive engagement related to this generalized reason.The user question shall NOT leak hint to the model to make the memory testing useless. Always follow the template below:</span>
+<span class="ltx_p" id="A3.F18.pic1.2.2.2.1.1.4">{
+”User Question”: xxx,
+”Model Response”: yyy
+}.</span>
+<span class="ltx_p" id="A3.F18.pic1.2.2.2.1.1.5">Do NOT modify the names of these keys. Fill in the actual data at placeholders ’xxx’ and ’yyy’ in the template. Please use DOUBLE quotes in order to generate the correct JSON format. No other words.</span>
+</span></foreignobject></g></g></svg>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 18: </span>Prompt for generating “Generalize to new scenarios” <em class="ltx_emph ltx_font_italic" id="A3.F18.2.1">in-situ</em> queries.</figcaption>
+</figure>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sat Apr 19 08:01:07 2025 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>
