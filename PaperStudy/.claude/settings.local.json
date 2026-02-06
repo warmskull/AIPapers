@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(python:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Skill(paper-reader)",
+      "Skill(academic-translator)"
     ]
   }
 }
